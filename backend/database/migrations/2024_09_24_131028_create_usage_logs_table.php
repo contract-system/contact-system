@@ -11,8 +11,8 @@ return new class extends Migration
         Schema::create('usage_logs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sim_card_id')->constrained('sim_cards')->onDelete('cascade'); // Reference to SIM card
-            $table->decimal('data_used', 10, 2); // Data used in GB
-            $table->date('usage_date'); // Date of usage
+            $table->decimal('data_used', 10, 2);
+            $table->date('usage_date');
             $table->timestamps();
         });
     }

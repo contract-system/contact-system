@@ -1,5 +1,7 @@
 <?php
+
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\User\ContractController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +32,13 @@ Route::post('/register', [UserController::class, 'register']);
 
 Route::post('login', [UserController::class, 'login']); // Login route
 
+
+
+// just for test 
+Route::prefix('contracts')->group(function () {
+    Route::get('/', [ContractController::class, 'getAllContract']); // Fetch all contracts
+    Route::get('/{contractId}', [ContractController::class, 'getOneContract']); // Fetch a single contract by ID
+    Route::post('/', [ContractController::class, 'storeContract']); // Create a new contract
+    Route::put('/{contractId}', [ContractController::class, 'updateContract']); // Update a contract
+    Route::delete('/{contractId}', [ContractController::class, 'deleteContract']); // Delete a contract
+});

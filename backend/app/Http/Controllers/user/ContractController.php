@@ -81,7 +81,7 @@ class ContractController extends Controller
             'admin_name' => 'nullable|string|max:255',
             'admin_id' => 'nullable|numeric',
             'status' => 'required|in:Pending,Approved,Expired',
-            'subscriptions' => 'required|in:Pending,Approved,Expired',
+            'subscriptions' => 'required|in:Pending,Accept,Expired',
             'user_id' => 'required|exists:users,id',
             'subscriptions_id' => 'required|exists:subscriptions,id',
         ]);

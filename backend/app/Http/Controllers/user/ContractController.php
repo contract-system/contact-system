@@ -52,7 +52,7 @@ class ContractController extends Controller
             'admin_id' => 'nullable|number|max:255',
             'status' => 'required|in:Pending,Approved,Expired',
             'user_id' => 'required|exists:users,id', // Assuming it relates to the users table
-            'sim_id' => 'required|exists:sims,id', // Assuming it relates to a sim card or related table
+            'subscription_id' => 'required|exists:subscriptions,id',
         ]);
         $newContract = Contract::create($contractData);
         if ($newContract) {

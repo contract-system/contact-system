@@ -48,8 +48,8 @@ class ContractController extends Controller
             'signing_date' => 'required|date',
             'expiration_date' => 'required|date|after:signing_date',
             'total_cost' => 'required|numeric|min:0',
-            'employee_name' => 'nullable|string|max:255',
-            'employee_number' => 'nullable|string|max:255',
+            'admin_name' => 'nullable|string|max:255',
+            'admin_id' => 'nullable|number|max:255',
             'status' => 'required|in:Pending,Approved,Expired',
             'user_id' => 'required|exists:users,id', // Assuming it relates to the users table
             'sim_id' => 'required|exists:sims,id', // Assuming it relates to a sim card or related table
@@ -72,8 +72,8 @@ class ContractController extends Controller
             'signing_date' => 'required|date',
             'expiration_date' => 'required|date|after:signing_date',
             'total_cost' => 'required|numeric|min:0',
-            'employee_name' => 'nullable|string|max:255',
-            'employee_number' => 'nullable|string|max:255',
+            'admin_name' => 'nullable|string|max:255',
+            'admin_id' => 'nullable|number|max:255',
             'status' => 'required|in:Pending,Approved,Expired',
             'user_id' => 'required|exists:users,id', // Assuming it relates to the users table
             'sim_id' => 'required|exists:sims,id', // Assuming it relates to a sim card or related table

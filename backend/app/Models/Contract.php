@@ -11,7 +11,11 @@ class Contract extends Model
 
     protected $fillable = [
         'contract_name', 'signing_date', 'expiration_date', 'total_cost',
-        'legal_officer_name', 'legal_officer_employee_number', 'status', 'user_id','sim_id'
+        'admin_name',
+        'admin_id',
+        'status',
+        'user_id',
+        'sim_id'
     ];
 
     

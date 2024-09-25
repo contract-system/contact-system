@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\ContractController;
+use App\Http\Controllers\SubscriptionController;
 
 
 
@@ -15,3 +16,6 @@ Route::prefix('contracts')->group(function () {
     Route::put('/{contractId}', [ContractController::class, 'updateContract']); // Update a contract
     Route::delete('/{contractId}', [ContractController::class, 'deleteContract']); // Delete a contract 
 });
+
+
+Route::apiResource('subscriptions', SubscriptionController::class);

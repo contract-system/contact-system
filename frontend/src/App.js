@@ -1,27 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-import Logout from './components/Logout';
-import Dashboard from './components/Dashboard';
-import PrivateRoute from './components/PrivateRoute'; // This might need refactoring as well
+import Login from './components/Login'; // Adjusted path
+import AdminDashboard from './components/AdminDashboard'; // Adjusted path
+import UserDashboard from './components/UserDashboard'; // Adjusted path
+import Register from './components/Register'; // Adjusted path
 
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
-    </Router>
-  );
-}
+const App = () => {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/user" element={<UserDashboard />} />
+                <Route path="/register" element={<Register />} />
+            </Routes>
+        </Router>
+    );
+};
 
 export default App;

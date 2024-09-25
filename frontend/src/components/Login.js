@@ -1,44 +1,67 @@
-// src/components/Login.js
 import React, { useState } from 'react';
-import api from '../api'; // axios instance for making API requests
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Add useNavigate import
+import axios from 'axios';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate(); // Initialize useNavigate
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+    const handleLogin = async (e) => {
+        e.preventDefault();
 
-    try {
-      const response = await api.post('/login', { email, password });
-      localStorage.setItem('token', response.data.token);
-      alert('Login successful');
-      navigate('/dashboard'); // Navigate to dashboard or home page after login
-    } catch (err) {
-      setError('Invalid credentials');
-    }
-  };
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/login', {
+                email,
+                password,
+            });
 
-  return (
-    <div>
-      <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleLogin}>
+            // Extract user info
+            const { token, user, message: successMessage } = response.data;
+
+            // Store the token in local storage
+            localStorage.setItem('token', token);
+
+            console.log('Login successful:', user);
+            setMessage(successMessage || 'Login successful!');
+
+            // Redirect to the appropriate dashboard based on user role
+            if (user.role_id === 1) {
+                navigate('/admin'); // Redirect to Admin Dashboard
+            } else {
+                navigate('/user'); // Redirect to User Dashboard
+            }
+        } catch (error) {
+            console.error('Login error:', error.response ? error.response.data : error.message);
+            setMessage('Invalid credentials. Please try again.');
+        }
+    };
+
+    return (
         <div>
-          <label>Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            <h2>Login</h2>
+            <form onSubmit={handleLogin}>
+                <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <Link to="/register">Register here</Link></p> {/* Registration link */}
+            {message && <p>{message}</p>}
         </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
+    );
 };
 
 export default Login;

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class UserController extends Controller
 {  public function register(Request $request)
@@ -18,8 +19,6 @@ class UserController extends Controller
         $request->validate([
             'full_name' => 'required',
             'email' => 'required|email|unique:users',
-            'employee_number' => 'required|string',
-            'department' => 'required|string',
             'password' => 'required|min:6',
             'role_id' => 'required|exists:roles,id',
         ]);
@@ -28,8 +27,6 @@ class UserController extends Controller
             'full_name' => $request->full_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'department' => $request->department,
-            'employee_number' => $request->employee_number,
             'role_id' => $request->role_id,
         ]);
 
@@ -46,8 +43,6 @@ class UserController extends Controller
         $request->validate([
             'full_name' => 'required',
             'email' => 'required|email|unique:users',
-            'employee_number' => 'required|string',
-            'department' => 'required|string',
             'password' => 'required|min:6',
             'role_id' => 'required|exists:roles,id',
         ]);
@@ -56,8 +51,6 @@ class UserController extends Controller
             'full_name' => $request->full_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'department' => $request->department,
-            'employee_number' => $request->employee_number,
             'role_id' => $request->role_id,
         ]);
 
@@ -66,8 +59,6 @@ class UserController extends Controller
                 'id' => $user->id,
                 'full_name' => $user->full_name,
                 'email' => $user->email,
-                'department' => $user->department,
-                'employee_number' => $user->employee_number,
                 'role_id' => $user->role_id,
             ]
         ], 201);
@@ -83,13 +74,11 @@ class UserController extends Controller
         $request->validate([
             'full_name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
-            'department' => 'required|string',
-            'employee_number' => 'required|string',
             'role_id' => 'required|exists:roles,id',
         ]);
 
         $user = User::findOrFail($id);
-        $user->update($request->only('full_name', 'email', 'department', 'employee_number', 'role_id'));
+        $user->update($request->only('full_name', 'email', 'role_id'));
 
         if ($request->has('password')) {
             $user->password = Hash::make($request->password);
@@ -102,8 +91,6 @@ class UserController extends Controller
                 'id' => $user->id,
                 'full_name' => $user->full_name,
                 'email' => $user->email,
-                'department' => $user->department,
-                'employee_number' => $user->employee_number,
                 'role_id' => $user->role_id,
             ]
         ], 200);
@@ -127,6 +114,7 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+            $user = User::findOrFail($user->id);
 
             // Generate token
             $token = $user->createToken('AppToken')->plainTextToken;

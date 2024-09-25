@@ -33,6 +33,10 @@ Route::post('/register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']); // Login route
 
 
+// Logout route requires authentication via Sanctum token
+Route::middleware('auth:sanctum')->post('/logout', [UserController::class, 'logout']);
+
+
 
 
 require __DIR__ . '/admin.php';

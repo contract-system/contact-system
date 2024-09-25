@@ -86,10 +86,7 @@ class ContractController extends Controller
             'subscriptions_id' => 'required|exists:subscriptions,id',
         ]);
 
-        // there is an error when updating the subscriptions
-        //'subscriptions' => 'required|in:Pending,Approved,Expired',
-        //http://127.0.0.1:8000/api/updateContract/1 --> this is the api
-        // dd($contractData['subscriptions']);
+
 
         $contract = Contract::findOrFail($contractId);
         $contract->update($contractData);

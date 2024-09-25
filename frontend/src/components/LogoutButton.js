@@ -16,7 +16,7 @@ const LogoutButton = () => {
 
             localStorage.removeItem('token');
             alert('Logged out successfully');
-            navigate('/login'); // Redirect to login page
+            navigate('/'); // Redirect to login page
         } catch (err) {
             console.error('Error logging out', err);
             alert('Failed to log out');

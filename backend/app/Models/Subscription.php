@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subscriptions extends Model
+class Subscription extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name', 'speed', 'speed', 'price',];
+        'name',
+        'speed',
+        'details',
+        'price',
+    ];
         public function subscriptions()
         {
-            return $this->belongsTo(Subscriptions::class);
+            return $this->belongsTo(Subscription::class);
         }
-
-    }
-
+}

@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\UserController;
-
-
+use App\Http\Controllers\user\ContractController;
+use App\Models\Contract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +36,12 @@ Route::post('login', [UserController::class, 'login']); // Login route
 // Logout route requires authentication via Sanctum token
 Route::middleware('auth:sanctum')->post('/logout', [UserController::class, 'logout']);
 
-
+//<---------------------- contract routes ------------------------>
+Route::get('getAllContracts', [ContractController::class, 'getAllContract'])->name("getAllContracts"); // Login route
+Route::get('getOneContracts/{id}', [ContractController::class, 'getOneContract'])->name("getOneContracts"); // Login route
+Route::post('storeContract', [ContractController::class, 'storeContract'])->name("storeContract");
+Route::put('updateContract/{id}', [ContractController::class, 'updateContract'])->name("updateContract");
+Route::delete('deleteContract/{id}', [ContractController::class, 'deleteContract'])->name("deleteContract");
 
 
 require __DIR__ . '/admin.php';

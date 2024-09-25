@@ -27,7 +27,7 @@ Route::get('/test', function () {
 });
 
 Route::post('/register', [UserController::class, 'register']);
-
+//ufjkb.
 
 
 Route::post('login', [UserController::class, 'login']); // Login route

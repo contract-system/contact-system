@@ -8,18 +8,19 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('usage_logs', function (Blueprint $table) {
+        Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sim_card_id')->constrained('sim_cards')->onDelete('cascade'); // Reference to SIM card
-            $table->decimal('data_used', 10, 2);
-            $table->date('usage_date');
+            $table->string('name');
+            $table->string('speed');
+            $table->string('details');
+            $table->decimal('price');
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('usage_logs');
+        Schema::dropIfExists('subscriptions');
     }
 
 };

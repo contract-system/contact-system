@@ -10,13 +10,23 @@ class Contract extends Model
     use HasFactory;
 
     protected $fillable = [
-        'contract_name', 'signing_date', 'expiration_date', 'total_cost',
-        'legal_officer_name', 'legal_officer_employee_number', 'status', 'user_id','sim_id'
+        'contract_name', 'signing_date', 'contact_expiration_date', 'subscription_expiration_date','total_cost',
+        'admin_id', 'user_id','subscriptions_id'
     ];
 
-    
+
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(User::class,'admin_id');
+    }
+
+    public function subscriptions()
+    {
+        return $this->HasOne(Subscriptions::class);
     }
 }

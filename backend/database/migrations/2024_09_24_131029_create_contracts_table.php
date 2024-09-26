@@ -19,7 +19,7 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('subscriptions_id')->unsigned();
             $table->enum('status', ['Pending', 'Approved', 'Expired'])->default('Pending');
-            $table->enum('subscriptions', ['Pending', 'Accept', 'Expired'])->default('Pending');
+            $table->enum('subscription_status', ['Pending', 'Accept', 'Expired'])->default('Pending');
             $table->timestamps();
 
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');

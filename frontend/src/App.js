@@ -2,6 +2,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
+import Header_pricing from './components/Header/Header_pricing';
+
+
 import Footer from './components/Footer/Footer';
 import Hero from './components/Hero/Hero';
 import Services from './components/Services/Services';
@@ -13,7 +16,7 @@ import Contact from './components/Contact/Contact';
 const App = () => {
   return (
     <Router>
-      <Header />
+      <Header_pricing />
       <Routes>
         <Route path="/" element={<Hero />} />
         <Route path="/about" element={<About />} />

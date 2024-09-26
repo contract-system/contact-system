@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Subscription;
@@ -29,22 +30,21 @@ class SubscriptionController extends Controller
                 'details' => 'nullable|string',  // جعل details اختياري
                 'price' => 'required|numeric',
             ]);
-    
-           
+
+
             $subscription = Subscription::create($validatedData);
             return response()->json($subscription, 201);
         } catch (ValidationException $e) {
             return response()->json(['error' => $e->errors()], 422);
         } catch (\Exception $e) {
-            \Log::error('Error creating subscription: ' . $e->getMessage());
             return response()->json([
                 'error' => 'Failed to create subscription',
                 'message' => $e->getMessage()
             ], 500);
         }
     }
-    
-    
+
+
 
     // Show a specific subscription
     public function show($id)

@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('speed');
             $table->string('details');
             $table->decimal('price');
+            $table->enum('type', ['package', 'subscription']);
             $table->timestamps();
         });
     }
@@ -22,5 +23,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('subscriptions');
     }
-
 };

@@ -12767,3 +12767,6 @@ p.sticky-label {
 .footer-bottom-4 p a {
   color: var(--theme);
 }
+a {
+  text-decoration: none !important;
+}

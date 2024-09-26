@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\user\ContractController;
 use App\Models\Contract;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +45,10 @@ Route::post('storeContract', [ContractController::class, 'storeContract'])->name
 Route::put('updateContract/{id}', [ContractController::class, 'updateContract'])->name("updateContract");
 Route::delete('deleteContract/{id}', [ContractController::class, 'deleteContract'])->name("deleteContract");
 
+//<---------------------- contract routes ------------------------>
+Route::get('getAllPackages', [SubscriptionController::class, 'getAllPackages'])->name("getAllPackages"); // Login route
+Route::get('getOneSub/{id}', [SubscriptionController::class, 'getOneSub'])->name("getOneSub"); // Login route
+// Route::apiResource('subscriptions', SubscriptionController::class);
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/user.php';

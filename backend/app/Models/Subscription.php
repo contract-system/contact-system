@@ -15,12 +15,13 @@ class Subscription extends Model
         'details',
         'price',
     ];
-    public function subscriptions()
-    {
-        return $this->belongsTo(Subscription::class);
-    }
+
     public function features()
     {
         return $this->hasMany(SubscriptionFeature::class);
+    }
+    public function contract()
+    {
+        return $this->HasOne(contract::class, 'subscriptions_id');
     }
 }

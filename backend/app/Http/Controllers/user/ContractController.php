@@ -4,6 +4,7 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class ContractController extends Controller
@@ -11,12 +12,13 @@ class ContractController extends Controller
     // Get all contracts for a user
     public function getAllContract()
     {
-        $contracts = Contract::all();
-
-        if ($contracts->isNotEmpty()) {
+        // $contracts = Contract::with('subscriptions')->get();
+        $featuresOfSubscribtion = Subscription::with(['features', 'contract'])->get();
+        if ($featuresOfSubscribtion->isNotEmpty()) {
             return response()->json([
                 "message" => "Contracts fetched successfully",
-                "contracts" => $contracts,
+                // "contracts" => $contracts,
+                "features of subscribtion" => $featuresOfSubscribtion,
             ]);
         } else {
             return response()->json([
@@ -35,6 +37,7 @@ class ContractController extends Controller
             return response()->json([
                 "message" => "Contract fetched successfully!",
                 "contract" => $contract,
+
             ]);
         } else {
             return response()->json([

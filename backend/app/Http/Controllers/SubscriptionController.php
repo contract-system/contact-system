@@ -9,16 +9,36 @@ use Illuminate\Validation\ValidationException;
 
 class SubscriptionController extends Controller
 {
-    // Get all subscriptions
-    public function index()
+    public function getAllPackages()
     {
         try {
-            $subscriptions = Subscription::all();
-            return response()->json($subscriptions, 200);
+            // Eager load features for each subscription
+            $subscriptions = Subscription::with('features')->where('type', '=', 'package')->get();
+
+            // Transform the response to include only necessary data
+            $formattedSubscriptions = $subscriptions->map(function ($subscription) {
+                return [
+                    'id' => $subscription->id,
+                    'name' => $subscription->name,
+                    'speed' => $subscription->speed,
+                    'details' => $subscription->details,
+                    'price' => (int)$subscription->price,
+                    'features_count' => $subscription->features->count(),
+                    'features' => $subscription->features->map(function ($feature) {
+                        return [
+                            'id' => $feature->id,
+                            'feature_name' => $feature->feature_name,
+                        ];
+                    }),
+                ];
+            });
+
+            return response()->json($formattedSubscriptions, 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error fetching subscriptions'], 500);
         }
     }
+
 
     // Store a new subscription
     public function store(Request $request)
@@ -47,11 +67,12 @@ class SubscriptionController extends Controller
 
 
     // Show a specific subscription
-    public function show($id)
+    public function getOneSub(string $id)
     {
         try {
             $subscription = Subscription::findOrFail($id);
-            return response()->json($subscription, 200);
+            $subWithFeatures = Subscription::with('features')->first();
+            return response()->json($subWithFeatures, 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Subscription not found'], 404);
         } catch (\Exception $e) {

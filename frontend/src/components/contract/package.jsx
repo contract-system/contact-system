@@ -1,265 +1,91 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 const Packages = () => {
+  const [packages, setpackages] = useState([]);
+
+  useEffect(() => {
+    // get all packages
+    axios.get("http://127.0.0.1:8000/api/getAllPackages").then((response) => {
+      setpackages(response.data);
+      const features = response.data.features; // Make sure this line is executed after the data is retrieved
+      console.log(features);
+    });
+  }, []);
   return (
     <>
-      <section class="pricing-section fix section-padding">
-        <div class="container custom-container-2">
-          <div class="section-title text-center">
-            <span class="wow fadeInUp">Tariffs</span>
-            <h2 class="text-white wow fadeInUp" data-wow-delay=".3s">
-              Choose your plan
-            </h2>
+      <section class="pricing-section-2 fix section-padding">
+        <div class="container">
+          <div class="section-title text-center mb-0">
+            <span>OUR PACKAGES PLAN</span>
+            <h2>Our Packages Plan</h2>
           </div>
-          <div class="row">
-            <div
-              class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
-              data-wow-delay=".2s"
-            >
-              <div class="pricing-card-items">
-                <div class="pricing-header">
-                  <h6>Internet</h6>
-                  <h3>Easy Surfing</h3>
+          <div class="row pt-5">
+            {/* active to make it red */}
+            {packages.map((subPackage) => (
+              <div class="pricing-wrapper " key={subPackage.id}>
+                <div class="row justify-content-between align-items-center">
+                  <div class="col-xxl-6 col-xl-6 col-lg-12">
+                    <div class="pricing-content-box d-flex align-items-center justify-content-between">
+                      <div class="price-content">
+                        <p>Installation Charge: 1,500 Tk</p>
+                        <h3>{subPackage.name}</h3>
+                        <span>
+                          <em>5%</em> VAT Included
+                        </span>
+                      </div>
+                      <div class="price-icon">
+                        <div class="icon">
+                          <i class="flaticon-satellite-tv"></i>
+                        </div>
+                        <div class="icon">
+                          <i class="flaticon-satellite-tv"></i>
+                        </div>
+                        <div class="icon">
+                          <i class="flaticon-smartphone"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xxl-5 col-xl-6 col-lg-12">
+                    <div class="pricing-list-items d-flex align-items-center">
+                      <ul
+                        class="price-list"
+                        style={{
+                          width: "250px",
+                          listStyleType: "none",
+                          padding: 0,
+                        }}
+                      >
+                        {subPackage.features_count > 0 ? (
+                          subPackage.features.map((feature) => (
+                            <li key={feature.id}>
+                              <i className="far fa-check-circle"></i>
+                              {feature.feature_name}
+                            </li>
+                          ))
+                        ) : (
+                          <li>
+                            <i className="far fa-times-circle"></i>{" "}
+                            {/* Use a different icon for no features */}
+                            No features available.
+                          </li>
+                        )}
+                      </ul>
+                      <div class="price-button">
+                        <h3>
+                          {parseInt(subPackage.price, 10)} <i>JOD</i>
+                          <span>/mo</span>
+                        </h3>
+                        <a href="contact.html" class="theme-btn">
+                          <span>Get Started</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <ul class="icon-items">
-                  <li>
-                    <i class="flaticon-connection"></i>
-                  </li>
-                </ul>
-                <ul class="price-list">
-                  <li>
-                    <i class="far fa-check"></i>
-                    Up to 50Mbps
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    Night Turbo-Speed
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    WiFi router
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    Unlimited devices
-                  </li>
-                </ul>
-                <div class="price">
-                  $24.99 <span> | month </span>
-                </div>
-                <a href="pricing.html" class="theme-btn">
-                  <span>Get started</span>
-                </a>
               </div>
-            </div>
-            <div
-              class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
-              data-wow-delay=".4s"
-            >
-              <div class="pricing-card-items">
-                <div class="pricing-header">
-                  <h6>TV</h6>
-                  <h3>Impression</h3>
-                </div>
-                <ul class="icon-items">
-                  <li>
-                    <i class="flaticon-smart-tv"></i>
-                  </li>
-                </ul>
-                <ul class="price-list">
-                  <li>
-                    <i class="far fa-check"></i>
-                    Up to 50Mbps
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    Night Turbo-Speed
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    WiFi router
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    Unlimited devices
-                  </li>
-                </ul>
-                <div class="price">
-                  $18.99 <span> | month </span>
-                </div>
-                <a href="pricing.html" class="theme-btn">
-                  <span>Get started</span>
-                </a>
-              </div>
-            </div>
-            <div
-              class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
-              data-wow-delay=".2s"
-            >
-              <div class="pricing-card-items">
-                <div class="pricing-header">
-                  <h6>Internet</h6>
-                  <h3>Easy Surfing</h3>
-                </div>
-                <ul class="icon-items">
-                  <li>
-                    <i class="flaticon-connection"></i>
-                  </li>
-                </ul>
-                <ul class="price-list">
-                  <li>
-                    <i class="far fa-check"></i>
-                    Up to 50Mbps
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    Night Turbo-Speed
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    WiFi router
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    Unlimited devices
-                  </li>
-                </ul>
-                <div class="price">
-                  $24.99 <span> | month </span>
-                </div>
-                <a href="pricing.html" class="theme-btn">
-                  <span>Get started</span>
-                </a>
-              </div>
-            </div>
-            <div
-              class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
-              data-wow-delay=".4s"
-            >
-              <div class="pricing-card-items">
-                <div class="pricing-header">
-                  <h6>TV</h6>
-                  <h3>Impression</h3>
-                </div>
-                <ul class="icon-items">
-                  <li>
-                    <i class="flaticon-smart-tv"></i>
-                  </li>
-                </ul>
-                <ul class="price-list">
-                  <li>
-                    <i class="far fa-check"></i>
-                    Up to 50Mbps
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    Night Turbo-Speed
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    WiFi router
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    Unlimited devices
-                  </li>
-                </ul>
-                <div class="price">
-                  $18.99 <span> | month </span>
-                </div>
-                <a href="pricing.html" class="theme-btn">
-                  <span>Get started</span>
-                </a>
-              </div>
-            </div>
-            <div
-              class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
-              data-wow-delay=".6s"
-            >
-              <div class="pricing-card-items">
-                <span class="tag">popular</span>
-                <div class="pricing-header">
-                  <h6>Internet + TV</h6>
-                  <h3>Home Comfort</h3>
-                </div>
-                <ul class="icon-items">
-                  <li>
-                    <i class="flaticon-connection"></i>
-                  </li>
-                  <li>
-                    <i class="flaticon-smart-tv"></i>
-                  </li>
-                </ul>
-                <ul class="price-list">
-                  <li>
-                    <i class="far fa-check"></i>
-                    Up to 50Mbps
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    Night Turbo-Speed
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    WiFi router
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    Unlimited devices
-                  </li>
-                </ul>
-                <div class="price">
-                  $37.99 <span> | month </span>
-                </div>
-                <a href="pricing.html" class="theme-btn">
-                  <span>Get started</span>
-                </a>
-              </div>
-            </div>
-            <div
-              class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
-              data-wow-delay=".8s"
-            >
-              <div class="pricing-card-items">
-                <div class="pricing-header">
-                  <h6>Internet + TV + Phone</h6>
-                  <h3>Premium Plan</h3>
-                </div>
-                <ul class="icon-items">
-                  <li>
-                    <i class="flaticon-connection"></i>
-                  </li>
-                  <li>
-                    <i class="flaticon-smart-tv"></i>
-                  </li>
-                  <li>
-                    <i class="flaticon-smart-tv-3"></i>
-                  </li>
-                </ul>
-                <ul class="price-list">
-                  <li>
-                    <i class="far fa-check"></i>
-                    Up to 50Mbps
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    Night Turbo-Speed
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    WiFi router
-                  </li>
-                  <li>
-                    <i class="far fa-check"></i>
-                    Unlimited devices
-                  </li>
-                </ul>
-                <div class="price">
-                  $49.99 <span> | month </span>
-                </div>
-                <a href="pricing.html" class="theme-btn">
-                  <span>Get started</span>
-                </a>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

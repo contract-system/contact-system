@@ -3,7 +3,10 @@ import video2 from "../assets/video2.mp4";
 
 const HeroSection = () => {
   return (
-    <div className="flex flex-col items-center mt-6 lg:mt-20">
+    <section
+      id="HeroSection"
+      className="flex flex-col items-center mt-6 lg:mt-20"
+    >
       <h1 className="text-4xl sm:text-6xl lg:text-7xl text-center tracking-wide">
         VirtualR build tools
         <span className="bg-gradient-to-r from-orange-500 to-red-800 text-transparent bg-clip-text">
@@ -47,7 +50,7 @@ const HeroSection = () => {
           Your browser does not support the video tag.
         </video>
       </div>
-    </div>
+    </section>
   );
 };
 

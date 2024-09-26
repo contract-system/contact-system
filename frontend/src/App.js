@@ -1,7 +1,7 @@
 // src/App.js
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Header_pricing from './components/Header/Header_pricing';
+import Header from './components/Header/Header_pricing';
 import Footer from './components/Footer/Footer';
 import Hero from './components/Hero/Hero';
 import Services from './components/Services/Services';
@@ -12,14 +12,9 @@ import Layout from './components/contract/layout'; // If this is used somewhere
 const App = () => {
   return (
     <>
+      <Header />
+      <Hero />
 
-      <Routes>
-        <Route path="/" element={<Hero />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/contract" element={<Layout />} /> {/* Add this route */}
-      </Routes>
       <Footer />
     </>
   );

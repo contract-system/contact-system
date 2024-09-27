@@ -9,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 
 class SubscriptionController extends Controller
 {
+    // get all subs type of packages
     public function getAllPackages()
     {
         try {
@@ -23,6 +24,42 @@ class SubscriptionController extends Controller
                     'speed' => $subscription->speed,
                     'details' => $subscription->details,
                     'price' => (int)$subscription->price,
+                    'internet' => $subscription->internet,
+                    'TV' => $subscription->TV,
+                    'phone' => $subscription->phone,
+                    'features_count' => $subscription->features->count(),
+                    'features' => $subscription->features->map(function ($feature) {
+                        return [
+                            'id' => $feature->id,
+                            'feature_name' => $feature->feature_name,
+                        ];
+                    }),
+                ];
+            });
+
+            return response()->json($formattedSubscriptions, 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error fetching subscriptions'], 500);
+        }
+    }
+    // get all subs type of subscription
+    public function getAllSubs()
+    {
+        try {
+            // Eager load features for each subscription
+            $subscriptions = Subscription::with('features')->where('type', '=', 'subscription')->get();
+
+            // Transform the response to include only necessary data
+            $formattedSubscriptions = $subscriptions->map(function ($subscription) {
+                return [
+                    'id' => $subscription->id,
+                    'name' => $subscription->name,
+                    'speed' => $subscription->speed,
+                    'details' => $subscription->details,
+                    'price' => (int)$subscription->price,
+                    'internet' => $subscription->internet,
+                    'TV' => $subscription->TV,
+                    'phone' => $subscription->phone,
                     'features_count' => $subscription->features->count(),
                     'features' => $subscription->features->map(function ($feature) {
                         return [

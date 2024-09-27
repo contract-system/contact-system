@@ -23,7 +23,7 @@ const App = () => {
       {/* <About /> */}
       {/* Uncomment this if you want to show the Contact section */}
       {/* <Contact /> */}
-      <Profile />
+      <Subscription />
       <Footer />
     </>
   );

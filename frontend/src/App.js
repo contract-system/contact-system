@@ -16,7 +16,7 @@ const App = () => {
     <>
       <Header />
 
-      <Subscription />
+      <Hero />
       <Footer />
     </>
   );

@@ -47,6 +47,7 @@ Route::delete('deleteContract/{id}', [ContractController::class, 'deleteContract
 
 //<---------------------- contract routes ------------------------>
 Route::get('getAllPackages', [SubscriptionController::class, 'getAllPackages'])->name("getAllPackages"); // Login route
+Route::get('getAllSubs', [SubscriptionController::class, 'getAllSubs'])->name("getAllSubs"); // Login route
 Route::get('getOneSub/{id}', [SubscriptionController::class, 'getOneSub'])->name("getOneSub"); // Login route
 // Route::apiResource('subscriptions', SubscriptionController::class);
 

@@ -54,7 +54,7 @@ const Subscription = () => {
 
   return (
     <>
-      {/* <Header_pricing /> */}
+      <Header_pricing />
       <div className="subscription-container">
         <Sidebar
           onEditProfile={handleEditProfile}

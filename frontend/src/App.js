@@ -7,7 +7,7 @@ import Hero from "./components/Hero/Hero";
 import Services from "./components/Services/Services";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
-import Layout from "./components/contract/layout"; // If this is used somewhere
+import Layout from "./components/contract/layout";
 import Profile from "./components/Profile/Profile";
 import Subscription from "./components/Profile/Subscription";
 
@@ -15,14 +15,7 @@ const App = () => {
   return (
     <>
       <Header />
-      {/* Uncomment this if you want to show the Hero section */}
-      {/* <Hero /> */}
-      {/* Uncomment this if you want to show the Services section */}
-      {/* <Services /> */}
-      {/* Uncomment this if you want to show the About section */}
-      {/* <About /> */}
-      {/* Uncomment this if you want to show the Contact section */}
-      {/* <Contact /> */}
+
       <Subscription />
       <Footer />
     </>

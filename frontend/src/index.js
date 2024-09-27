@@ -12,15 +12,15 @@ import Login from './components/Login/Login';
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "./styles/main.css"; // Your custom styles
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 
 import Layout from "./components/contract/layout"; // Import your Layout component
 import Profile from "./components/Profile/Profile";
 import Subscription from "./components/Profile/Subscription";
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./styles/main.css"; // Your custom styles
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

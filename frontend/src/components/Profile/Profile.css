@@ -1,0 +1,94 @@
+/* Profile.css */
+
+body {
+  background-color: #171422; /* Dark background for body */
+  color: #ffffff; /* White text color */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-page {
+  background-color: #f4f4f4; /* Light gray background for the profile page */
+  padding: 20px;
+  max-width: 600px; /* Limit max width for better layout */
+  margin: 20px auto; /* Center align the profile section */
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-header h2 {
+  color: #171422; /* Dark color for heading */
+}
+
+.edit-btn {
+  background-color: #d6111e; /* Red background for edit button */
+  color: #ffffff; /* White text */
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.profile-info {
+  margin-bottom: 20px;
+}
+
+.profile-field {
+  margin-bottom: 15px; /* Space between fields */
+}
+
+.profile-field label {
+  display: block; /* Ensure label takes up the full width */
+  font-weight: bold; /* Bold text for labels */
+  color: #171422; /* Dark color for labels */
+}
+
+.profile-field p {
+  background-color: #ffffff; /* White background for paragraph text */
+  padding: 10px; /* Padding for paragraph text */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.profile-field input {
+  color: #171422;
+  padding: 10px; /* Padding inside input fields */
+  border-radius: 5px; /* Rounded corners for inputs */
+  border: 1px solid #ccc; /* Light gray border */
+  width: 100%; /* Full width for input fields */
+  background-color: #ffffff; /* White background for input fields */
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 10px; /* Space between action buttons */
+}
+
+.save-btn {
+  background-color: #171422; /* Dark background for save button */
+  color: #ffffff; /* White text */
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.cancel-btn {
+  background-color: #d6111e; /* Red background for cancel button */
+  color: #ffffff; /* White text */
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}

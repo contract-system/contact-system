@@ -4,6 +4,8 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header_pricing';
 import Footer from './components/Footer/Footer';
 import Hero from './components/Hero/Hero';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 import Services from './components/Services/Services';
 import About from './components/About/About';
 import Contact from './components/Contact/Contact';
@@ -14,7 +16,6 @@ const App = () => {
     <>
       <Header />
       <Hero />
-
       <Footer />
     </>
   );

@@ -247,9 +247,9 @@ const Header_pricing = () => {
                   <div className="mobile-menu"></div>
                 </div>
                 <div className="header-right-button d-none d-xl-block">
-                  <a href="contact.html" className="theme-btn theme-btn2">
+  <Link to="/Login" className="theme-btn theme-btn2">
                     Get Started <i className="fas fa-arrow-right"></i>
-                  </a>
+  </Link>
                 </div>
                 <div className="hamburger-menu d-xl-none">
                   <a href="javascript:void(0);" className="hamburger">

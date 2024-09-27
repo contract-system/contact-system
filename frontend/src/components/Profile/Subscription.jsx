@@ -68,36 +68,22 @@ const Subscription = () => {
           }}
           className="container custom-container-2"
         >
-          <div className="section-title text-center">
-            <span className="wow fadeInUp">Tariffs</span>
-            <h2 className="text-white wow fadeInUp" data-wow-delay=".3s">
-              Choose your plan
-            </h2>
-          </div>
           <div className="row">
             {contract ? (
               <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp">
                 <div className="pricing-card-items">
                   <div className="pricing-header">
-                    <h6>
+                    {/* If the h6 is not needed, you can remove it, or add content */}
+                    <h6>Subscription Details</h6>
+                    <ul>
                       {contract.contract_name &&
-                      contract.contract_name.includes("Internet")
-                        ? "Internet"
-                        : "TV"}
-                    </h6>
-                    <h3>{contract.contract_name}</h3>
+                        contract.contract_name.includes("TV") && (
+                          <li>
+                            <i className="flaticon-smart-tv"></i>
+                          </li>
+                        )}
+                    </ul>
                   </div>
-                  <ul className="icon-items">
-                    <li>
-                      <i className="flaticon-connection"></i>
-                    </li>
-                    {contract.contract_name &&
-                      contract.contract_name.includes("TV") && (
-                        <li>
-                          <i className="flaticon-smart-tv"></i>
-                        </li>
-                      )}
-                  </ul>
                   <ul className="price-list">
                     <li>
                       <i className="far fa-check"></i>

@@ -1,0 +1,45 @@
+/* Sidebar styles */
+.sidebar {
+  width: 200px;
+  height: calc(100vh - 100px); /* Subtract navbar and footer height */
+  background-color: #2c3e50;
+  position: absolute;
+  top: 150px; /* Space for fixed navbar */
+  left: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto; /* Allows scrolling if content overflows */
+}
+
+/* Sidebar menu list */
+.sidebar-menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Sidebar menu items */
+.sidebar-item {
+  color: #ecf0f1;
+  padding: 10px 0;
+  cursor: pointer;
+  font-size: 18px;
+  border-bottom: 1px solid #34495e;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Hover effect for menu items */
+.sidebar-item:hover {
+  background-color: #34495e;
+}
+
+/* Logout button specific styling */
+.logout {
+  color: #e74c3c;
+}
+
+.logout:hover {
+  background-color: #c0392b;
+}

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
+import Header from "../Header/Header";
+import Header_pricing from "../Header/Header_pricing";
 
 const Subscription = () => {
   const [contract, setContract] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-   
     const fetchContract = async () => {
       const userId = 1; //localStorage.getItem("userId"); // Retrieve the user ID from local storage
 
@@ -26,11 +27,11 @@ const Subscription = () => {
           setContract(response.data.contract);
         } else {
           console.error("Fetched data is not a valid contract:", response.data);
-          setContract(null); 
+          setContract(null);
         }
       } catch (error) {
         console.error("Error fetching contract:", error);
-        setContract(null); 
+        setContract(null);
       } finally {
         setLoading(false);
       }
@@ -45,7 +46,6 @@ const Subscription = () => {
 
   const handleEditProfile = () => {
     console.log("Edit Profile clicked");
-    
   };
 
   const handleViewSubscription = () => {
@@ -53,97 +53,100 @@ const Subscription = () => {
   };
 
   return (
-    <div className="subscription-container">
-      <Sidebar
-        onEditProfile={handleEditProfile}
-        onViewSubscription={handleViewSubscription}
-      />
+    <>
+      <Header_pricing />
+      <div className="subscription-container">
+        <Sidebar
+          onEditProfile={handleEditProfile}
+          onViewSubscription={handleViewSubscription}
+        />
 
-      <div
-        style={{
-          position: "relative",
-          marginLeft: "18%",
-        }}
-        className="container custom-container-2"
-      >
-        <div className="section-title text-center">
-          <span className="wow fadeInUp">Tariffs</span>
-          <h2 className="text-white wow fadeInUp" data-wow-delay=".3s">
-            Choose your plan
-          </h2>
-        </div>
-        <div className="row">
-          {contract ? (
-            <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp">
-              <div className="pricing-card-items">
-                <div className="pricing-header">
-                  <h6>
+        <div
+          style={{
+            position: "relative",
+            marginLeft: "18%",
+          }}
+          className="container custom-container-2"
+        >
+          <div className="section-title text-center">
+            <span className="wow fadeInUp">Tariffs</span>
+            <h2 className="text-white wow fadeInUp" data-wow-delay=".3s">
+              Choose your plan
+            </h2>
+          </div>
+          <div className="row">
+            {contract ? (
+              <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp">
+                <div className="pricing-card-items">
+                  <div className="pricing-header">
+                    <h6>
+                      {contract.contract_name &&
+                      contract.contract_name.includes("Internet")
+                        ? "Internet"
+                        : "TV"}
+                    </h6>
+                    <h3>{contract.contract_name}</h3>
+                  </div>
+                  <ul className="icon-items">
+                    <li>
+                      <i className="flaticon-connection"></i>
+                    </li>
                     {contract.contract_name &&
-                    contract.contract_name.includes("Internet")
-                      ? "Internet"
-                      : "TV"}
-                  </h6>
-                  <h3>{contract.contract_name}</h3>
+                      contract.contract_name.includes("TV") && (
+                        <li>
+                          <i className="flaticon-smart-tv"></i>
+                        </li>
+                      )}
+                  </ul>
+                  <ul className="price-list">
+                    <li>
+                      <i className="far fa-check"></i>
+                      Total Cost: ${contract.total_cost}
+                    </li>
+                    <li>
+                      <i className="far fa-check"></i>
+                      Status: {contract.status}
+                    </li>
+                    <li>
+                      <i className="far fa-check"></i>
+                      Subscription Status: {contract.subscription_status}
+                    </li>
+                    <li>
+                      <i className="far fa-check"></i>
+                      Signing Date:{" "}
+                      {new Date(contract.signing_date).toLocaleDateString()}
+                    </li>
+                    <li>
+                      <i className="far fa-check"></i>
+                      Expiration Date:{" "}
+                      {new Date(
+                        contract.contract_expiration_date
+                      ).toLocaleDateString()}
+                    </li>
+                    <li>
+                      <i className="far fa-check"></i>
+                      Subscription Expiration:{" "}
+                      {new Date(
+                        contract.subscription_expiration_date
+                      ).toLocaleDateString()}
+                    </li>
+                  </ul>
+                  <div className="price">
+                    ${contract.total_cost} <span> | month </span>
+                  </div>
+                  <a href="pricing.html" className="theme-btn">
+                    <span>Get started</span>
+                  </a>
                 </div>
-                <ul className="icon-items">
-                  <li>
-                    <i className="flaticon-connection"></i>
-                  </li>
-                  {contract.contract_name &&
-                    contract.contract_name.includes("TV") && (
-                      <li>
-                        <i className="flaticon-smart-tv"></i>
-                      </li>
-                    )}
-                </ul>
-                <ul className="price-list">
-                  <li>
-                    <i className="far fa-check"></i>
-                    Total Cost: ${contract.total_cost}
-                  </li>
-                  <li>
-                    <i className="far fa-check"></i>
-                    Status: {contract.status}
-                  </li>
-                  <li>
-                    <i className="far fa-check"></i>
-                    Subscription Status: {contract.subscription_status}
-                  </li>
-                  <li>
-                    <i className="far fa-check"></i>
-                    Signing Date:{" "}
-                    {new Date(contract.signing_date).toLocaleDateString()}
-                  </li>
-                  <li>
-                    <i className="far fa-check"></i>
-                    Expiration Date:{" "}
-                    {new Date(
-                      contract.contract_expiration_date
-                    ).toLocaleDateString()}
-                  </li>
-                  <li>
-                    <i className="far fa-check"></i>
-                    Subscription Expiration:{" "}
-                    {new Date(
-                      contract.subscription_expiration_date
-                    ).toLocaleDateString()}
-                  </li>
-                </ul>
-                <div className="price">
-                  ${contract.total_cost} <span> | month </span>
-                </div>
-                <a href="pricing.html" className="theme-btn">
-                  <span>Get started</span>
-                </a>
               </div>
-            </div>
-          ) : (
-            <div>No contract available.</div>
-          )}
+            ) : (
+              <div>No contract available.</div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default Subscription; 
+export default Subscription;

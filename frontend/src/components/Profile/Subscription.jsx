@@ -11,7 +11,12 @@ const Subscription = () => {
 
   useEffect(() => {
     const fetchContract = async () => {
+<<<<<<< HEAD
       const userId = 1; // Retrieve the user ID from local storage or hardcoded
+=======
+      const userId = 1; //localStorage.getItem("userId"); // Retrieve the user ID from local storage
+      // its static change it
+>>>>>>> 13573a6d75f60ea987929d71e37a776965f82edf
 
       if (!userId) {
         console.error("User ID not found");
@@ -21,7 +26,7 @@ const Subscription = () => {
 
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/getOneContracts/${userId}`
+          `http://127.0.0.1:8000/api/getUserContract/${userId}`
         );
 
         if (response.data && response.data.contract) {
@@ -62,9 +67,21 @@ const Subscription = () => {
           onViewSubscription={handleViewSubscription}
         />
 
+<<<<<<< HEAD
         <div className="container custom-container">
           <div className="row" style={{ margin: "26px 34px 29px 175px" }}>
             {contract ? (
+=======
+        <div
+          style={{
+            position: "relative",
+            marginLeft: "18%",
+          }}
+          className="container custom-container-2"
+        >
+          <div className="row">
+            {contract && contract.length && contract.total_cost ? (
+>>>>>>> 13573a6d75f60ea987929d71e37a776965f82edf
               <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp">
                 <div className="card">
                   <div className="header">
@@ -190,7 +207,12 @@ const Subscription = () => {
                 </div>
               </div>
             ) : (
-              <div>No contract available.</div>
+              <div class="container-fluid d-flex justify-content-center align-items-center full-screen">
+                <div class="text-center">
+                  <i class="fas fa-exclamation-circle fa-3x text-danger mb-3"></i>
+                  <h3 class="text-danger fw-bold">No contract available.</h3>
+                </div>
+              </div>
             )}
           </div>
         </div>

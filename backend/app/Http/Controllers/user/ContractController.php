@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Contract;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContractController extends Controller
 {
@@ -111,5 +112,24 @@ class ContractController extends Controller
         return response()->json([
             "message" => "Contract deleted successfully!",
         ], 200);
+    }
+
+    // get contract  that user has
+
+    public function getUserContract(string $id)
+    {
+        // $userID = Auth::user()->id; // change the id
+        $contract = Contract::where('user_id', $id)
+            ->get();
+        if ($contract) {
+            return response()->json([
+                "contract" => $contract
+            ], 200);
+        } else {
+            return response()->json([
+                "message" => "Contract not found!",
+                "contract" => $contract
+            ], 200);
+        }
     }
 }

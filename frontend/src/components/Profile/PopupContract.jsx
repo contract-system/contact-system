@@ -71,6 +71,8 @@ const PopupCompany = ({ isOpen, onClose, selectedSub }) => {
           justify-content: center;
           align-items: center;
           z-index: 1000;
+          opacity: 0;
+          animation: fadeIn 0.3s forwards;
         }
 
         /* Popup Content */
@@ -83,6 +85,20 @@ const PopupCompany = ({ isOpen, onClose, selectedSub }) => {
           box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
           z-index: 1001;
           text-align: left;
+          transform: scale(0.8);
+          animation: scaleUp 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes scaleUp {
+          to {
+            transform: scale(1);
+          }
         }
 
         /* Form Container */
@@ -130,13 +146,37 @@ const PopupCompany = ({ isOpen, onClose, selectedSub }) => {
           font-size: 16px;
           padding: 12px 24px;
           border-radius: 6px;
-          transition: all 0.3s ease;
+          transition: all 0.4s ease;
           cursor: pointer;
           display: inline-block;
+          position: relative;
+          overflow: hidden;
         }
 
         .theme-btn:hover {
           background-color: #b8001d;
+        }
+
+        .theme-btn span {
+          position: relative;
+          z-index: 2;
+        }
+
+        .theme-btn::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 300%;
+          height: 300%;
+          background: rgba(255, 255, 255, 0.1);
+          transition: all 0.6s ease;
+          transform: translate(-50%, -50%) scale(0);
+          border-radius: 50%;
+        }
+
+        .theme-btn:hover::before {
+          transform: translate(-50%, -50%) scale(1);
         }
 
         .theme-btn:disabled {

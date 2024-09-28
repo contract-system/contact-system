@@ -107,9 +107,7 @@ const Subscription = () => {
                         ${contract.total_cost}
                       </span>
                     </div>
-                    <p className="desc">
-                      Etiam ac convallis enim, eget euismod dolor.
-                    </p>
+                   
                     <ul className="lists">
                       <li className="list">
                         <span>Total Cost: ${contract.total_cost}</span>
@@ -148,7 +146,7 @@ const Subscription = () => {
                     <button
                       type="button"
                       onClick={() => openContractPopup(contract)}
-                      className="action"
+                      className="action "
                     >
                       Contract Details
                     </button>

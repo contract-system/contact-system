@@ -31,9 +31,6 @@ root.render(
         <Route path="/contract" element={<Layout />} />{" "}
         {/* New route for Layout */}
         <Route path="/profile" element={<Profile />} />
-<<<<<<< HEAD
-  <Route path="/subscription" element={<ProfileLayout />} />
-=======
         <Route path="/subscription" element={<Subscription />} />
         <Route path="/Admin" element={<AdminPage />}>
           <Route index element={<ContractsTable contracts="All" />} />
@@ -51,7 +48,6 @@ root.render(
             element={<ContractsTable contracts="Approved" />}
           />
         </Route>
->>>>>>> 9146bf7817c62f26438ce50ff83ff94e85f03abc
       </Routes >
     </BrowserRouter >
   </React.StrictMode >

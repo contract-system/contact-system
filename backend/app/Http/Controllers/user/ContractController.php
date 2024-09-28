@@ -127,7 +127,7 @@ class ContractController extends Controller
                 $expirationDate = Carbon::parse($contract->contract_expiration_date);
                 // Calculate remaining days
                 $remainingDays = Carbon::now()->lt($expirationDate)
-                    ? Carbon::now()->diffInDays($expirationDate) + 1
+                    ? Carbon::now()->diffInMonths($expirationDate) + 1
                     : 0;
 
                 $contract->remaining_days = $remainingDays;

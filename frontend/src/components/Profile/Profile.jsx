@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Sidebar from "./Sidebar"; 
+import Sidebar from "./Sidebar";
 import "./Profile.css";
+import Header_pricing from "../Header/Header_pricing";
 
 const Profile = () => {
   const [profile, setProfile] = useState({
@@ -56,7 +57,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(`${URL}/users/2`);
+        const response = await axios.get(`${URL}/users/1`);
         setProfile(response.data);
       } catch (error) {
         console.error("Error fetching profile:", error);
@@ -80,84 +81,87 @@ const Profile = () => {
   };
 
   return (
-    <div className="profile-page">
-      <Sidebar
-        onEditProfile={handleEditProfile}
-        onViewSubscription={handleViewSubscription}
-      />
-      <div className="profile-content">
-        <div className="profile-header">
-          <h2>Profile Information</h2>
-          {!isEditing && (
-            <button onClick={() => setIsEditing(true)} className="edit-btn">
-              Edit Profile
-            </button>
-          )}
-        </div>
-        <div className="profile-info">
-          <div className="profile-field">
-            <label>Employee Number:</label>
-            <p>{profile.id}</p>
-          </div>
-          <div className="profile-field">
-            <label>Full Name:</label>
-            {isEditing ? (
-              <input
-                type="text"
-                name="full_name"
-                value={profile.full_name}
-                onChange={handleChange}
-              />
-            ) : (
-              <p>{profile.full_name}</p>
+    <>
+      <Header_pricing />
+      <div className="profile-page">
+        <Sidebar
+          onEditProfile={handleEditProfile}
+          onViewSubscription={handleViewSubscription}
+        />
+        <div className="profile-content">
+          <div className="profile-header">
+            <h2>Profile Information</h2>
+            {!isEditing && (
+              <button onClick={() => setIsEditing(true)} className="edit-btn">
+                Edit Profile
+              </button>
             )}
           </div>
-          <div className="profile-field">
-            <label>Email:</label>
-            {isEditing ? (
-              <input
-                type="email"
-                name="email"
-                value={profile.email}
-                onChange={handleChange}
-              />
-            ) : (
-              <p>{profile.email}</p>
-            )}
-          </div>
-          <div className="profile-field">
-            <label>Password:</label>
-            {isEditing ? (
-              <>
-                <h6>
-                  If you do not want to change the password, leave the field
-                  blank.
-                </h6>
+          <div className="profile-info">
+            <div className="profile-field">
+              <label>Employee Number:</label>
+              <p>{profile.id}</p>
+            </div>
+            <div className="profile-field">
+              <label>Full Name:</label>
+              {isEditing ? (
                 <input
-                  type="password"
-                  name="password"
-                  value={profile.password}
+                  type="text"
+                  name="full_name"
+                  value={profile.full_name}
                   onChange={handleChange}
                 />
-              </>
-            ) : (
-              <p>*******</p>
-            )}
+              ) : (
+                <p>{profile.full_name}</p>
+              )}
+            </div>
+            <div className="profile-field">
+              <label>Email:</label>
+              {isEditing ? (
+                <input
+                  type="email"
+                  name="email"
+                  value={profile.email}
+                  onChange={handleChange}
+                />
+              ) : (
+                <p>{profile.email}</p>
+              )}
+            </div>
+            <div className="profile-field">
+              <label>Password:</label>
+              {isEditing ? (
+                <>
+                  <h6>
+                    If you do not want to change the password, leave the field
+                    blank.
+                  </h6>
+                  <input
+                    type="password"
+                    name="password"
+                    value={profile.password}
+                    onChange={handleChange}
+                  />
+                </>
+              ) : (
+                <p>*******</p>
+              )}
+            </div>
           </div>
-        </div>
 
-        {isEditing && (
-          <div className="profile-actions">
-            <button onClick={handleSave} className="save-btn">
-              Save Changes
-            </button>
-            <button onClick={handleCancel} className="cancel-btn">
-              Cancel
-            </button>
-          </div>
-        )}
+          {isEditing && (
+            <div className="profile-actions">
+              <button onClick={handleSave} className="save-btn">
+                Save Changes
+              </button>
+              <button onClick={handleCancel} className="cancel-btn">
+                Cancel
+              </button>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

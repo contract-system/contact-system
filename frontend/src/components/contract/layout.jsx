@@ -11,12 +11,12 @@ import Breadcrumb from "./breadcrumb";
 const Layout = () => {
   return (
     <>
-      {/* <Header_pricing /> */}
+      <Header_pricing />
       <Breadcrumb />
       <Feature />
       <Pricing />
       <Packages />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

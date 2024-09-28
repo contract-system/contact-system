@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
-import Header from "../Header/Header";
-import Header_pricing from "../Header/Header_pricing";
+import HeaderPricing from "../Header/Header_pricing"; // Renamed for consistency
+import "./Subscription.css"; // Import the external CSS file
+import { color } from "framer-motion";
 
 const Subscription = () => {
   const [contract, setContract] = useState([]);
@@ -58,13 +59,18 @@ const Subscription = () => {
 
   return (
     <>
-      <Header_pricing />
+      <HeaderPricing />
       <div className="subscription-container">
         <Sidebar
           onEditProfile={handleEditProfile}
           onViewSubscription={handleViewSubscription}
         />
 
+<<<<<<< HEAD
+        <div className="container custom-container">
+          <div className="row" style={{ margin: "26px 34px 29px 175px" }}>
+            {contract ? (
+=======
         <div
           style={{
             position: "relative",

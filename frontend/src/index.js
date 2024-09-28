@@ -12,6 +12,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./styles/main.css"; // Your custom styles
 import ProfileLayout from "./components/Profile/profileLayout";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import AdminPage from "./components/Admin/AdminPage";
+import ContractsTable from "./components/Admin/ContractsTable";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -28,8 +31,28 @@ root.render(
         <Route path="/contract" element={<Layout />} />{" "}
         {/* New route for Layout */}
         <Route path="/profile" element={<Profile />} />
-        <Route path="/subscription" element={<ProfileLayout />} />
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+<<<<<<< HEAD
+  <Route path="/subscription" element={<ProfileLayout />} />
+=======
+        <Route path="/subscription" element={<Subscription />} />
+        <Route path="/Admin" element={<AdminPage />}>
+          <Route index element={<ContractsTable contracts="All" />} />
+          <Route path="All" element={<ContractsTable contracts="All" />} />
+          <Route
+            path="Pending"
+            element={<ContractsTable contracts="Pending" />}
+          />
+          <Route
+            path="Expired"
+            element={<ContractsTable contracts="Expired" />}
+          />
+          <Route
+            path="Approved"
+            element={<ContractsTable contracts="Approved" />}
+          />
+        </Route>
+>>>>>>> 9146bf7817c62f26438ce50ff83ff94e85f03abc
+      </Routes >
+    </BrowserRouter >
+  </React.StrictMode >
 );

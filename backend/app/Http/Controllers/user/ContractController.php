@@ -5,7 +5,9 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Models\Contract;
 use App\Models\Subscription;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContractController extends Controller
 {
@@ -112,5 +114,33 @@ class ContractController extends Controller
         return response()->json([
             "message" => "Contract deleted successfully!",
         ], 200);
+    }
+
+    // get contract  that user has
+    public function getUserContract(string $id)
+    {
+        $contracts = Contract::where('user_id', $id)
+            ->where('status', 'Approved')
+            ->get();
+
+        if ($contracts->isNotEmpty()) {
+            foreach ($contracts as $contract) {
+                $expirationDate = Carbon::parse($contract->contract_expiration_date);
+                // Calculate remaining days
+                $remainingDays = Carbon::now()->lt($expirationDate)
+                    ? Carbon::now()->diffInDays($expirationDate) + 1
+                    : 0;
+
+                $contract->remaining_days = $remainingDays;
+            }
+            return response()->json([
+                "contracts" => $contracts
+            ], 200);
+        }
+
+        return response()->json([
+            "message" => "No approved contracts found!",
+            "contracts" => [] // Return an empty array if no contracts are found
+        ], 404); // Use 404 for not found
     }
 }

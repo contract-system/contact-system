@@ -11,9 +11,13 @@ return new class extends Migration
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('company_name');
             $table->string('speed');
             $table->string('details');
             $table->decimal('price');
+            $table->boolean("internet");
+            $table->boolean("TV");
+            $table->boolean("phone");
             $table->enum('type', ['package', 'subscription']);
             $table->timestamps();
         });

@@ -1,178 +1,87 @@
 // src/components/About/About.js
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const Pricing = () => {
+  const [subs, setSubs] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/getAllSubs")
+      .then((response) => setSubs(response.data));
+  }, []);
   return (
     <>
-      <section class="pricing-section-2 fix section-padding">
-        <div class="container">
-          <div class="section-title text-center mb-0">
-            <span>OUR PRICING PLAN</span>
-            <h2>Our Pricing Plan</h2>
+      <section class="pricing-section fix section-padding">
+        <div class="container custom-container-2">
+          <div class="section-title text-center">
+            <span class="wow fadeInUp">Tariffs</span>
+            <h2 class="text-white wow fadeInUp" data-wow-delay=".3s">
+              Choose your plan
+            </h2>
           </div>
-          <div class="row pt-5">
-            <div class="pricing-wrapper">
-              <div class="row justify-content-between align-items-center">
-                <div class="col-xxl-6 col-xl-6 col-lg-12">
-                  <div class="pricing-content-box d-flex align-items-center justify-content-between">
-                    <div class="price-content">
-                      <p>Installation Charge: 1,500 Tk</p>
-                      <h3>Tv+Internet</h3>
-                      <span>
-                        <em>5%</em> VAT Included
-                      </span>
-                    </div>
-                    <div class="price-icon">
-                      <div class="icon">
-                        <i class="flaticon-television"></i>
-                      </div>
-                      <div class="icon">
-                        <i class="flaticon-signal"></i>
-                      </div>
-                    </div>
+          <div class="row">
+            {subs.map((sub) => (
+              <div
+                className="col-xl-3 col-lg-4 col-md-6  wow fadeInUp"
+                data-wow-delay=".8s"
+                key={sub.id}
+              >
+                <div class="pricing-card-items">
+                  <div class="pricing-header">
+                    <h6>
+                      {sub.internet ? <span>internet</span> : ""}
+                      {sub.TV ? <span> + TV</span> : ""}
+                      {sub.phone ? <span> + Phone</span> : ""}
+                    </h6>
+                    <h3>Premium Plan</h3>
                   </div>
-                </div>
-                <div class="col-xxl-5 col-xl-6 col-lg-12">
-                  <div class="pricing-list-items d-flex align-items-center">
-                    <ul class="price-list">
+                  <ul class="icon-items p-0">
+                    {sub.internet ? (
                       <li>
-                        <i class="far fa-check"></i>
-                        Internet with a 50 Mbps
+                        <i class="flaticon-connection"></i>
                       </li>
+                    ) : (
+                      ""
+                    )}
+                    {sub.TV ? (
                       <li>
-                        <i class="far fa-check"></i>
-                        Connect multiple users at once
+                        <i class="flaticon-smart-tv"></i>
                       </li>
+                    ) : (
+                      ""
+                    )}
+                    {sub.phone ? (
                       <li>
-                        <i class="far fa-check"></i>
-                        WiFi router & prevention
+                        <i class="flaticon-smart-tv-3"></i>
                       </li>
+                    ) : (
+                      ""
+                    )}
+                  </ul>
+                  <ul class="price-list">
+                    {sub.features_count > 0 ? (
+                      sub.features.map((feature) => (
+                        <li key={feature.id}>
+                          <i className="far fa-check-circle"></i>
+                          {feature.feature_name}
+                        </li>
+                      ))
+                    ) : (
                       <li>
-                        <i class="far fa-check"></i>
-                        Unlimited devices users
+                        <i className="far fa-times-circle"></i>
+                        No features available.
                       </li>
-                    </ul>
-                    <div class="price-button">
-                      <h3>
-                        30 <i>$</i>
-                        <span>/mo</span>
-                      </h3>
-                      <a href="contact.html" class="theme-btn">
-                        <span>Get Started</span>
-                      </a>
-                    </div>
+                    )}
+                  </ul>
+                  <div class="price">
+                    {sub.price} JOD<span> | month </span>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="pricing-wrapper active">
-              <div class="row justify-content-between align-items-center">
-                <div class="col-xxl-6 col-xl-6 col-lg-12">
-                  <div class="pricing-content-box d-flex align-items-center justify-content-between">
-                    <div class="price-content">
-                      <p>Installation Charge: 1,500 Tk</p>
-                      <h3>Tv+Mobile</h3>
-                      <span>
-                        <em>5%</em> VAT Included
-                      </span>
-                    </div>
-                    <div class="price-icon">
-                      <div class="icon">
-                        <i class="flaticon-television"></i>
-                      </div>
-                      <div class="icon">
-                        <i class="flaticon-smartphone"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xxl-5 col-xl-6 col-lg-12">
-                  <div class="pricing-list-items d-flex align-items-center">
-                    <ul class="price-list">
-                      <li>
-                        <i class="far fa-check"></i>
-                        Internet with a 50 Mbps
-                      </li>
-                      <li>
-                        <i class="far fa-check"></i>
-                        Connect multiple users at once
-                      </li>
-                      <li>
-                        <i class="far fa-check"></i>
-                        WiFi router & prevention
-                      </li>
-                      <li>
-                        <i class="far fa-check"></i>
-                        Unlimited devices users
-                      </li>
-                    </ul>
-                    <div class="price-button">
-                      <h3>
-                        40 <i>$</i>
-                        <span>/mo</span>
-                      </h3>
-                      <a href="contact.html" class="theme-btn">
-                        <span>Get Started</span>
-                      </a>
-                    </div>
-                  </div>
+                  <a href="pricing.html" class="theme-btn">
+                    <span>Get started</span>
+                  </a>
                 </div>
               </div>
-            </div>
-            <div class="pricing-wrapper">
-              <div class="row justify-content-between align-items-center">
-                <div class="col-xxl-6 col-xl-6 col-lg-12">
-                  <div class="pricing-content-box d-flex align-items-center justify-content-between">
-                    <div class="price-content">
-                      <p>Installation Charge: 1,500 Tk</p>
-                      <h3>Satelite+ Phone</h3>
-                      <span>
-                        <em>5%</em> VAT Included
-                      </span>
-                    </div>
-                    <div class="price-icon">
-                      <div class="icon">
-                        <i class="flaticon-satellite-tv"></i>
-                      </div>
-                      <div class="icon">
-                        <i class="flaticon-smartphone"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xxl-5 col-xl-6 col-lg-12">
-                  <div class="pricing-list-items d-flex align-items-center">
-                    <ul class="price-list">
-                      <li>
-                        <i class="far fa-check"></i>
-                        Internet with a 50 Mbps
-                      </li>
-                      <li>
-                        <i class="far fa-check"></i>
-                        Connect multiple users at once
-                      </li>
-                      <li>
-                        <i class="far fa-check"></i>
-                        WiFi router & prevention
-                      </li>
-                      <li>
-                        <i class="far fa-check"></i>
-                        Unlimited devices users
-                      </li>
-                    </ul>
-                    <div class="price-button">
-                      <h3>
-                        60 <i>$</i>
-                        <span>/mo</span>
-                      </h3>
-                      <a href="contact.html" class="theme-btn">
-                        <span>Get Started</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

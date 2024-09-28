@@ -32,9 +32,8 @@ class Contract extends Model
     {
         return $this->belongsTo(User::class, 'admin_id');
     }
-
     public function subscriptions()
     {
-        return $this->HasOne(Subscription::class);
+        return $this->belongsTo(Subscription::class);
     }
 }

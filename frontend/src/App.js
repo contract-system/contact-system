@@ -15,8 +15,7 @@ const App = () => {
   return (
     <>
       <Header />
-
-      <Subscription />
+      <Hero />
       <Footer />
     </>
   );

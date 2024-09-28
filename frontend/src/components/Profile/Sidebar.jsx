@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 import Swal from "sweetalert2";
 
@@ -43,6 +43,7 @@ const Sidebar = () => {
       <div className="sidebar">
         <ul className="sidebar-menu">
           <li className="sidebar-item" onClick={onEditProfile}>
+            {/* <Link to={"/userPro"}></Link> */}
             Edit Profile
           </li>
           <li className="sidebar-item" onClick={onViewSubscription}>

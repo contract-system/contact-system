@@ -6,6 +6,7 @@ import "./Subscription.css";
 import Footer from "../Footer/Footer";
 import Subscription from "./Subscription";
 import Pricing from "../contract/priceing";
+import Profile from "./Profile";
 
 const ProfileLayout = () => {
   const [contracts, setContracts] = useState([]);
@@ -75,16 +76,16 @@ const ProfileLayout = () => {
 
   return (
     <>
-      <HeaderPricing />
+      {/* <HeaderPricing /> */}
 
       <Sidebar
         onEditProfile={handleEditProfile}
         onViewSubscription={handleViewSubscription}
       />
+      <Profile path={"/userPro"} />
       {/* <Pricing /> */}
 
-      <Subscription />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

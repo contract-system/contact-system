@@ -5,6 +5,7 @@ import HeaderPricing from "../Header/Header_pricing";
 import "./Subscription.css";
 import PopupCompany from "./PopupCompany";
 import PopupContract from "./PopupContract";
+import Footer from "../Footer/Footer";
 
 const Subscription = () => {
   const [contracts, setContracts] = useState([]);
@@ -84,6 +85,8 @@ const Subscription = () => {
 
   return (
     <>
+      <HeaderPricing />
+      <Sidebar />
       <div className="subscription-container">
         <div
           style={{ position: "relative", marginLeft: "18%" }}
@@ -107,7 +110,7 @@ const Subscription = () => {
                         ${contract.total_cost}
                       </span>
                     </div>
-                   
+
                     <ul className="lists">
                       <li className="list">
                         <span>Total Cost: ${contract.total_cost}</span>
@@ -181,6 +184,7 @@ const Subscription = () => {
           selectedSub={selectedSub}
         />
       </div>
+      <Footer />
     </>
   );
 };

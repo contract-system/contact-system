@@ -30,7 +30,7 @@ root.render(
         <Route path="/Register" element={<Register />} />
         <Route path="/contract" element={<Layout />} />{" "}
         {/* New route for Layout */}
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<ProfileLayout />} />
         <Route path="/subscription" element={<Subscription />} />
         <Route path="/Admin" element={<AdminPage />}>
           <Route index element={<ContractsTable contracts="All" />} />

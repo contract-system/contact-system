@@ -1,9 +1,17 @@
-// src/components/Header/Header.js
 import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header_pricing = () => {
+  const navigate = useNavigate();
+  const token = sessionStorage.getItem("token");
+  const user = JSON.parse(sessionStorage.getItem("user")); // Assuming user details are stored in session storage
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    navigate("/"); // Redirect to home after logout
+  };
+
   return (
     <header>
       <div className="header-tops-section fix">
@@ -47,9 +55,9 @@ const Header_pricing = () => {
             <div className="header-main style-2">
               <div className="header-left">
                 <div className="logo">
-                  <a href="index.html" className="header-logo">
+                  <Link to="/" className="header-logo">
                     <img src="assets/img/logo/logo.svg" alt="logo-img" />
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="header-right d-flex justify-content-end align-items-center">
@@ -57,127 +65,21 @@ const Header_pricing = () => {
                   <div className="main-menu">
                     <nav id="mobile-menu">
                       <ul>
-                        <li className="has-dropdown active ">
-                          <Link to={"/"}>home</Link>
-                        </li>
-                        <li className="has-dropdown active d-xl-none">
-                          <a href="team.html" className="border-none">
-                            Home
-                            <i className="fas fa-angle-down"></i>
-                          </a>
-                          <ul className="submenu">
-                            <li>
-                              <a href="index.html">Home 01</a>
-                            </li>
-                            <li>
-                              <a href="index-2.html">Home 02</a>
-                            </li>
-                            <li>
-                              <a href="index-3.html">Home 03</a>
-                            </li>
-                            <li>
-                              <a href="index-4.html">Home 04</a>
-                            </li>
-                          </ul>
+                        <li>
+                          <Link to="/">Home</Link>
                         </li>
                         <li>
-                          <Link to={"/contract"}> contract</Link>
+                          <Link to="/contract">Contract</Link>
                         </li>
+                        {/* Profile link appears only if the user is logged in */}
+                        {token && (
+                          <li>
+                            <Link to="/profile">Profile</Link>
+                          </li>
+                        )}
+                        {/* Add other navigation items here */}
                         <li>
-                          <a href="news.html">
-                            Services
-                            <i className="fas fa-angle-down"></i>
-                          </a>
-                          <ul className="submenu">
-                            <li>
-                              <a href="service.html">Services</a>
-                            </li>
-                            <li>
-                              <a href="service-details.html">Service Details</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li className="has-dropdown">
-                          <a href="news.html">
-                            Pages
-                            <i className="fas fa-angle-down"></i>
-                          </a>
-                          <ul className="submenu">
-                            <li className="has-dropdown">
-                              <a href="shows-details.html">
-                                Shows
-                                <i className="fas fa-angle-down"></i>
-                              </a>
-                              <ul className="submenu">
-                                <li>
-                                  <a href="shows.html">Shows</a>
-                                </li>
-                                <li>
-                                  <a href="shows-details.html">Shows Details</a>
-                                </li>
-                              </ul>
-                            </li>
-                            <li className="has-dropdown">
-                              <a href="team.html">
-                                Team
-                                <i className="fas fa-angle-down"></i>
-                              </a>
-                              <ul className="submenu">
-                                <li>
-                                  <a href="team.html">Team</a>
-                                </li>
-                                <li>
-                                  <a href="team-details.html">Team Details</a>
-                                </li>
-                              </ul>
-                            </li>
-                            <li>
-                              <a href="pricing.html">Pricing</a>
-                            </li>
-                            <li>
-                              <a href="faq.html">Faq's</a>
-                            </li>
-                            <li>
-                              <a href="404.html">404 Page</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="shop-details.html">
-                            Shop
-                            <i className="fas fa-angle-down"></i>
-                          </a>
-                          <ul className="submenu">
-                            <li>
-                              <a href="shop.html">Shop Page</a>
-                            </li>
-                            <li>
-                              <a href="shop-cart.html">Shop Cart</a>
-                            </li>
-                            <li>
-                              <a href="shop-details.html">Shop Details</a>
-                            </li>
-                            <li>
-                              <a href="checkout.html">Checkout</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="news.html">
-                            Blog
-                            <i className="fas fa-angle-down"></i>
-                          </a>
-                          <ul className="submenu">
-                            <li>
-                              <a href="news.html">Blog</a>
-                            </li>
-                            <li>
-                              <a href="news-details.html">Blog Details</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="contact.html">Contact</a>
+                          <Link to="/contact">Contact</Link>
                         </li>
                       </ul>
                     </nav>
@@ -185,9 +87,15 @@ const Header_pricing = () => {
                   <div className="mobile-menu"></div>
                 </div>
                 <div className="header-right-button d-none d-xl-block">
-                  <a href="contact.html" className="theme-btn theme-btn2">
-                    Get Started <i className="fas fa-arrow-right"></i>
-                  </a>
+                  {token ? (
+                    <button onClick={handleLogout} className="theme-btn theme-btn2">
+                      Logout <i className="fas fa-arrow-right"></i>
+                    </button>
+                  ) : (
+                    <Link to="/login" className="theme-btn theme-btn2">
+                      Login <i className="fas fa-arrow-right"></i>
+                    </Link>
+                  )}
                 </div>
                 <div className="hamburger-menu d-xl-none">
                   <a href="javascript:void(0);" className="hamburger">

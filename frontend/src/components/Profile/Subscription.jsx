@@ -1,20 +1,44 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
-import HeaderPricing from "../Header/Header_pricing"; // Renamed for consistency
-import "./Subscription.css"; // Import the external CSS file
-import { color } from "framer-motion";
+import HeaderPricing from "../Header/Header_pricing";
+import "./Subscription.css";
+import PopupCompany from "./PopupCompany";
+import PopupContract from "./PopupContract";
+import Footer from "../Footer/Footer";
 
 const Subscription = () => {
-  const [contracts, setContracts] = useState([]); // State to hold contracts
-  const [loading, setLoading] = useState(true); // State for loading
+  const [contracts, setContracts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [isPopupCompanyOpen, setIsPopupCompanyOpen] = useState(false);
+  const [isPopupContractOpen, setIsPopupContractOpen] = useState(false);
+  const [selectedSub, setSelectedSub] = useState(null);
+
+  // Function to open the Company popup
+  const openCompanyPopup = (sub) => {
+    setSelectedSub(sub);
+    setIsPopupCompanyOpen(true);
+  };
+
+  // Function to open the Contract popup
+  const openContractPopup = (sub) => {
+    setSelectedSub(sub);
+    setIsPopupContractOpen(true);
+  };
+
+  // Function to close both popups
+  const closePopups = () => {
+    setIsPopupCompanyOpen(false);
+    setIsPopupContractOpen(false);
+    setSelectedSub(null);
+  };
 
   useEffect(() => {
     fetchContracts();
   }, []);
 
   const fetchContracts = async () => {
-    const userId = 1; // localStorage.getItem("userId"); // Retrieve the user ID from local storage
+    const userId = 1; // Change as needed
 
     if (!userId) {
       console.error("User ID not found");
@@ -27,13 +51,12 @@ const Subscription = () => {
         `http://127.0.0.1:8000/api/getUserContract/${userId}`
       );
 
-      // Check for the contracts array and set it to state
       if (
         response.data &&
         response.data.contracts &&
         response.data.contracts.length > 0
       ) {
-        setContracts(response.data.contracts); // Set all contracts
+        setContracts(response.data.contracts);
       } else {
         console.error("No contracts found:", response.data);
         setContracts([]);
@@ -46,31 +69,34 @@ const Subscription = () => {
     }
   };
 
-  const handleEditProfile = () => {
-    // Logic for editing profile
-  };
+  const getCardClass = (contract) => {
+    const today = new Date();
+    const expirationDate = new Date(contract.contract_expiration_date);
+    const timeDiff = expirationDate - today;
+    const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-  const handleViewSubscription = () => {
-    // Logic for viewing subscription
+    if (daysLeft <= 3) {
+      return "card red";
+    } else if (daysLeft <= 10) {
+      return "card yellow";
+    }
+    return "card";
   };
 
   return (
     <>
       <HeaderPricing />
+      <Sidebar />
       <div className="subscription-container">
-        <Sidebar
-          onEditProfile={handleEditProfile}
-          onViewSubscription={handleViewSubscription}
-        />
-
         <div
-          style={{
-            position: "relative",
-            marginLeft: "18%",
-          }}
+          style={{ position: "relative", marginLeft: "18%" }}
           className="container custom-container-2"
         >
+<<<<<<< HEAD
           <div className="row cards">
+=======
+          <div className="row mt-5 ml-5">
+>>>>>>> 1edd1ac50d181a8d40458d1f8c168a9009f5e251
             {loading ? (
               <div className="text-center">Loading...</div>
             ) : contracts.length > 0 ? (
@@ -79,7 +105,7 @@ const Subscription = () => {
                   key={contract.id}
                   className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp"
                 >
-                  <div className="card">
+                  <div className={getCardClass(contract)}>
                     <div className="header">
                       <span style={{ color: "#000" }} className="title">
                         {contract.contract_name}
@@ -89,83 +115,25 @@ const Subscription = () => {
                       </span>
                     </div>
 
-                    <p className="desc">
-                      Etiam ac convallis enim, eget euismod dolor.
-                    </p>
                     <ul className="lists">
                       <li className="list">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clipRule="evenodd"
-                          ></path>
-                        </svg>
                         <span>Total Cost: ${contract.total_cost}</span>
                       </li>
                       <li className="list">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clipRule="evenodd"
-                          ></path>
-                        </svg>
                         <span>Status: {contract.status}</span>
                       </li>
                       <li className="list">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clipRule="evenodd"
-                          ></path>
-                        </svg>
                         <span>
                           Subscription Status: {contract.subscription_status}
                         </span>
                       </li>
                       <li className="list">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clipRule="evenodd"
-                          ></path>
-                        </svg>
                         <span>
                           Signing Date:{" "}
                           {new Date(contract.signing_date).toLocaleDateString()}
                         </span>
                       </li>
                       <li className="list">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clipRule="evenodd"
-                          ></path>
-                        </svg>
                         <span>
                           Expiration Date:{" "}
                           {new Date(
@@ -174,17 +142,6 @@ const Subscription = () => {
                         </span>
                       </li>
                       <li className="list">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                            clipRule="evenodd"
-                          ></path>
-                        </svg>
                         <span style={{ color: "red" }}>
                           Subscription Expiration:{" "}
                           {new Date(
@@ -193,29 +150,45 @@ const Subscription = () => {
                         </span>
                       </li>
                     </ul>
-                    <button type="button" className="action">
-                      Get Started
+                    <button
+                      type="button"
+                      onClick={() => openContractPopup(contract)}
+                      className="action "
+                    >
+                      Contract Details
                     </button>
                     <br />
-                    <button type="" className="action">
-                      View
+                    <button
+                      type="button"
+                      onClick={() => openCompanyPopup(contract.subscriptions)}
+                      className="action"
+                    >
+                      View Company Info
                     </button>
                   </div>
                 </div>
               ))
             ) : (
-              <div className="container-fluid d-flex justify-content-center align-items-center full-screen">
-                <div className="text-center">
-                  <i className="fas fa-exclamation-circle fa-3x text-danger mb-3"></i>
-                  <h3 className="text-danger fw-bold">
-                    No contracts available.
-                  </h3>
-                </div>
-              </div>
+              <div className="text-center">No Contracts Found</div>
             )}
           </div>
         </div>
+
+        {/* Popup for Contract Details */}
+        <PopupContract
+          isOpen={isPopupContractOpen}
+          onClose={closePopups}
+          selectedSub={selectedSub}
+        />
+
+        {/* Popup for Company Details */}
+        <PopupCompany
+          isOpen={isPopupCompanyOpen}
+          onClose={closePopups}
+          selectedSub={selectedSub}
+        />
       </div>
+      <Footer />
     </>
   );
 };

@@ -12,16 +12,13 @@ return new class extends Migration
             $table->id();
             $table->string('contract_name');
             $table->date('signing_date');
-            $table->date('contract_expiration_date');
-            $table->date('subscription_expiration_date');
+            $table->date('expiration_date');
             $table->decimal('total_cost', 10, 2);
-            $table->bigInteger('admin_id')->unsigned()->nullable();
+            $table->bigInteger('admin_id')->unsigned()->nullable()->default(null);
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('subscriptions_id')->unsigned();
             $table->enum('status', ['Pending', 'Approved', 'Expired'])->default('Pending');
-            $table->enum('subscription_status', ['Pending', 'Accept', 'Expired'])->default('Pending');
             $table->timestamps();
-
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('subscriptions_id')->references('id')->on('subscriptions')->onDelete('cascade');

@@ -11,4 +11,16 @@ class AdminController extends Controller
     {
         return response()->json(["contracts" => Contract::with(['user', 'admin'])->get()]);
     }
+    public function getExpiredContracts()
+    {
+        return response()->json(["contracts" => Contract::with(['user', 'admin'])->where('status', 'Expired')->get()]);
+    }
+    public function getPendingContracts()
+    {
+        return response()->json(["contracts" => Contract::with(['user', 'admin'])->where('status', 'Pending')->get()]);
+    }
+    public function getApprovedContracts()
+    {
+        return response()->json(["contracts" => Contract::with(['user', 'admin'])->where('status', 'Approved')->get()]);
+    }
 }

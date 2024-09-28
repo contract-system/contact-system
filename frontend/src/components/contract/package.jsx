@@ -1,8 +1,23 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Popup from "../Popup/Popup";
 
 const Packages = () => {
   const [packages, setpackages] = useState([]);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedSub, setSelectedSub] = useState(null);
+
+  // Function to open the popup
+  const openPopup = (sub) => {
+    setSelectedSub(sub);
+    setIsPopupOpen(true);
+  };
+
+  // Function to close the popup
+  const closePopup = () => {
+    setIsPopupOpen(false);
+    setSelectedSub(null);
+  };
 
   useEffect(() => {
     // get all packages
@@ -77,9 +92,12 @@ const Packages = () => {
                           {parseInt(subPackage.price, 10)} <i>JOD</i>
                           <span>/mo</span>
                         </h3>
-                        <a href="contact.html" class="theme-btn">
+                        <button
+                          onClick={() => openPopup(subPackage)}
+                          class="theme-btn"
+                        >
                           <span>Get Started</span>
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -89,6 +107,11 @@ const Packages = () => {
           </div>
         </div>
       </section>
+      <Popup
+        isOpen={isPopupOpen}
+        onClose={closePopup}
+        selectedSub={selectedSub}
+      />
     </>
   );
 };

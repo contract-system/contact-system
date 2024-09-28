@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\user\ContractController;
@@ -50,6 +51,10 @@ Route::get('getAllPackages', [SubscriptionController::class, 'getAllPackages'])-
 Route::get('getAllSubs', [SubscriptionController::class, 'getAllSubs'])->name("getAllSubs"); // Login route
 Route::get('getOneSub/{id}', [SubscriptionController::class, 'getOneSub'])->name("getOneSub"); // Login route
 // Route::apiResource('subscriptions', SubscriptionController::class);
+Route::get('All', [AdminController::class, 'getAllContracts']);
+Route::get('Expired', [AdminController::class, 'getExpiredContracts']);
+Route::get('Approved', [AdminController::class, 'getApprovedContracts']);
+Route::get('Pending', [AdminController::class, 'getPendingContracts']);
 
 require __DIR__ . '/admin.php';
 require __DIR__ . '/user.php';

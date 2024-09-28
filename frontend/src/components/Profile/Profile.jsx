@@ -57,7 +57,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(`${URL}/users/2`);
+        const response = await axios.get(`${URL}/users/1`);
         setProfile(response.data);
       } catch (error) {
         console.error("Error fetching profile:", error);

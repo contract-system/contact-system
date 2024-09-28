@@ -6,6 +6,40 @@ Description: Internet Provider and Broadband TV HTML Template
 Version: 1.0.0
 */
 /*CSS Table Of Content Ends Here*/
+.full-screen {
+  height: 100vh; /* Full height */
+}
+/* Subscription.css */
+
+/* Subscription.css */
+.card {
+  background-color: #fff; /* Set your card background color */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.7); /* Default green neon shadow */
+  transition: box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.card:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 0, 1); /* Stronger green shadow on hover */
+}
+
+.card.red {
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.7); /* Red neon shadow */
+}
+
+.card.red:hover {
+  box-shadow: 0 0 20px rgba(255, 0, 0, 1); /* Stronger red shadow on hover */
+}
+
+.card.yellow {
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.7); /* Yellow neon shadow */
+}
+
+.card.yellow:hover {
+  box-shadow: 0 0 20px rgba(255, 255, 0, 1); /* Stronger yellow shadow on hover */
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Kode+Mono:wght@400..700&display=swap");
 :root {
   --body: #fff;

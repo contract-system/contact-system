@@ -45,6 +45,7 @@ Route::get('getOneContracts/{id}', [ContractController::class, 'getOneContract']
 Route::post('storeContract', [ContractController::class, 'storeContract'])->name("storeContract");
 Route::put('updateContract/{id}', [ContractController::class, 'updateContract'])->name("updateContract");
 Route::delete('deleteContract/{id}', [ContractController::class, 'deleteContract'])->name("deleteContract");
+Route::get('getUserContract/{id}', [ContractController::class, 'getUserContract'])->name("getUserContract"); // Login route
 
 //<---------------------- contract routes ------------------------>
 Route::get('getAllPackages', [SubscriptionController::class, 'getAllPackages'])->name("getAllPackages"); // Login route

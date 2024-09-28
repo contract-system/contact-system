@@ -107,10 +107,26 @@ export default function AdminPage() {
                 <ListGroup.Item
                   action
                   as={Link}
+                  to="Approved"
+                  className="text-danger"
+                >
+                  <i class="bi bi-collection-fill"></i> Approved Contracts
+                </ListGroup.Item>
+                <ListGroup.Item
+                  action
+                  as={Link}
+                  to="Expired"
+                  className="text-danger"
+                >
+                  <i class="bi bi-collection-fill"></i> Expired Contracts
+                </ListGroup.Item>
+                <ListGroup.Item
+                  action
+                  as={Link}
                   to="Pending"
                   className="text-danger"
                 >
-                  <i className="bi bi-table"></i> Pending Contracts
+                  <i class="bi bi-collection-fill"></i> Pending Contracts
                 </ListGroup.Item>
               </ListGroup>
             </Col>

@@ -15,6 +15,7 @@ import ProfileLayout from "./components/Profile/profileLayout";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import AdminPage from "./components/Admin/AdminPage";
 import ContractsTable from "./components/Admin/ContractsTable";
+import AddContract from "./components/Admin/AddContract";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -47,8 +48,9 @@ root.render(
             path="Approved"
             element={<ContractsTable contracts="Approved" />}
           />
+          <Route path="AddContract" element={<AddContract />} />
         </Route>
-      </Routes >
-    </BrowserRouter >
-  </React.StrictMode >
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
 );

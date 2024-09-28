@@ -248,9 +248,9 @@ const Header_pricing = () => {
                 </div>
                 <div className="header-right-button d-none d-xl-block">
   <Link to="/Login" className="theme-btn theme-btn2">
-                    Get Started <i className="fas fa-arrow-right"></i>
+    Get Started <i className="fas fa-arrow-right"></i>
   </Link>
-                </div>
+</div>
                 <div className="hamburger-menu d-xl-none">
                   <a href="javascript:void(0);" className="hamburger">
                     <span></span>

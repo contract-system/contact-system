@@ -1,15 +1,14 @@
 .card {
-  margin-left: -1rem;
-  margin-right: -1rem;
+  margin: 0 -1rem 2rem -1rem; /* Simplified margins */
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  margin-bottom: 2rem;
-  width: 320px;
+  width: 320px; /* Default width */
   flex-direction: column;
   border-radius: 0.25rem;
   background-color: rgba(17, 24, 39, 1);
   padding: 1.5rem;
+  transition: width 0.3s ease;
 }
 
 .header {
@@ -32,8 +31,7 @@
 }
 
 .desc {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
+  margin: 0.75rem 0; /* Single margin definition */
   line-height: 1.625;
   color: rgba(156, 163, 175, 1);
 }
@@ -69,5 +67,32 @@
 
 .action:hover {
   background-color: rgb(44, 62, 80);
-  color: rgb(255, 255, 255);
+  color: #fff;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+    margin: 0 0 2rem 0; /* Reset margins for small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.25rem; /* Adjusted font size for mobile */
+  }
+
+  .price {
+    font-size: 2.5rem;
+  }
+
+  .desc {
+    font-size: 0.875rem;
+  }
+}
+.cards {
+  display: flex;
+  overflow: auto;
+  gap: 5%;
 }

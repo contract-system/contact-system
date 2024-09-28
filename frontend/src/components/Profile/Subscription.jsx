@@ -92,7 +92,11 @@ const Subscription = () => {
           style={{ position: "relative", marginLeft: "18%" }}
           className="container custom-container-2"
         >
+<<<<<<< HEAD
+          <div className="row cards">
+=======
           <div className="row mt-5 ml-5">
+>>>>>>> 1edd1ac50d181a8d40458d1f8c168a9009f5e251
             {loading ? (
               <div className="text-center">Loading...</div>
             ) : contracts.length > 0 ? (

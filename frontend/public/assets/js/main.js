@@ -669,111 +669,111 @@
     });
 
     //>> Mouse Cursor Start <<//
-    function mousecursor() {
-      if ($("body")) {
-        const e = document.querySelector(".cursor-inner"),
-          t = document.querySelector(".cursor-outer");
-        let n,
-          i = 0,
-          o = !1;
-        (window.onmousemove = function (s) {
-          o ||
-            (t.style.transform =
-              "translate(" + s.clientX + "px, " + s.clientY + "px)"),
-            (e.style.transform =
-              "translate(" + s.clientX + "px, " + s.clientY + "px)"),
-            (n = s.clientY),
-            (i = s.clientX);
-        }),
-          $("body").on("mouseenter", "a, .cursor-pointer", function () {
-            e.classList.add("cursor-hover"), t.classList.add("cursor-hover");
-          }),
-          $("body").on("mouseleave", "a, .cursor-pointer", function () {
-            ($(this).is("a") && $(this).closest(".cursor-pointer").length) ||
-              (e.classList.remove("cursor-hover"),
-                t.classList.remove("cursor-hover"));
-          }),
-          (e.style.visibility = "visible"),
-          (t.style.visibility = "visible");
-      }
-    }
-    $(function () {
-      mousecursor();
-    });
+    //   function mousecursor() {
+    //     if ($("body")) {
+    //       const e = document.querySelector(".cursor-inner"),
+    //         t = document.querySelector(".cursor-outer");
+    //       let n,
+    //         i = 0,
+    //         o = !1;
+    //       (window.onmousemove = function (s) {
+    //         o ||
+    //           (t.style.transform =
+    //             "translate(" + s.clientX + "px, " + s.clientY + "px)"),
+    //           (e.style.transform =
+    //             "translate(" + s.clientX + "px, " + s.clientY + "px)"),
+    //           (n = s.clientY),
+    //           (i = s.clientX);
+    //       }),
+    //         $("body").on("mouseenter", "a, .cursor-pointer", function () {
+    //           e.classList.add("cursor-hover"), t.classList.add("cursor-hover");
+    //         }),
+    //         $("body").on("mouseleave", "a, .cursor-pointer", function () {
+    //           ($(this).is("a") && $(this).closest(".cursor-pointer").length) ||
+    //             (e.classList.remove("cursor-hover"),
+    //               t.classList.remove("cursor-hover"));
+    //         }),
+    //         (e.style.visibility = "visible"),
+    //         (t.style.visibility = "visible");
+    //     }
+    //   }
+    //   $(function () {
+    //     mousecursor();
+    //   });
 
-    // circle-progress
-    $(".circle-bar").loading();
-  }); // End Document Ready Function
+    //   // circle-progress
+    //   $(".circle-bar").loading();
+    // }); // End Document Ready Function
 
-  $.fn.loading = function () {
-    const DEFAULTS = {
-      backgroundColor: "#b3cef6",
-      progressColor: "#4b86db",
-      percent: 75,
-      duration: 2000,
+    $.fn.loading = function () {
+      const DEFAULTS = {
+        backgroundColor: "#b3cef6",
+        progressColor: "#4b86db",
+        percent: 75,
+        duration: 2000,
+      };
+
+      $(this).each(function () {
+        const $target = $(this);
+
+        const opts = {
+          backgroundColor: $target.data("color")
+            ? $target.data("color").split(",")[0]
+            : DEFAULTS.backgroundColor,
+          progressColor: $target.data("color")
+            ? $target.data("color").split(",")[1]
+            : DEFAULTS.progressColor,
+          percent: $target.data("percent")
+            ? $target.data("percent")
+            : DEFAULTS.percent,
+          duration: $target.data("duration")
+            ? $target.data("duration")
+            : DEFAULTS.duration,
+        };
+        // console.log(opts);
+
+        $target.append(
+          '<div class="background"></div><div class="rotate"></div><div class="left"></div><div class="right"></div><div class=""><span>' +
+          opts.percent +
+          "%</span></div>"
+        );
+
+        $target.find(".background").css("background-color", opts.backgroundColor);
+        $target.find(".left").css("background-color", opts.backgroundColor);
+        $target.find(".rotate").css("background-color", opts.progressColor);
+        $target.find(".right").css("background-color", opts.progressColor);
+
+        const $rotate = $target.find(".rotate");
+        setTimeout(function () {
+          $rotate.css({
+            transition: "transform " + opts.duration + "ms linear",
+            transform: "rotate(" + opts.percent * 3.6 + "deg)",
+          });
+        }, 1);
+
+        if (opts.percent > 50) {
+          let animationRight =
+            "toggle " + (opts.duration / opts.percent) * 50 + "ms step-end";
+          let animationLeft =
+            "toggle " + (opts.duration / opts.percent) * 50 + "ms step-start";
+          $target.find(".right").css({
+            animation: animationRight,
+            opacity: 1,
+          });
+          $target.find(".left").css({
+            animation: animationLeft,
+            opacity: 0,
+          });
+        }
+      });
     };
 
-    $(this).each(function () {
-      const $target = $(this);
-
-      const opts = {
-        backgroundColor: $target.data("color")
-          ? $target.data("color").split(",")[0]
-          : DEFAULTS.backgroundColor,
-        progressColor: $target.data("color")
-          ? $target.data("color").split(",")[1]
-          : DEFAULTS.progressColor,
-        percent: $target.data("percent")
-          ? $target.data("percent")
-          : DEFAULTS.percent,
-        duration: $target.data("duration")
-          ? $target.data("duration")
-          : DEFAULTS.duration,
-      };
-      // console.log(opts);
-
-      $target.append(
-        '<div class="background"></div><div class="rotate"></div><div class="left"></div><div class="right"></div><div class=""><span>' +
-        opts.percent +
-        "%</span></div>"
-      );
-
-      $target.find(".background").css("background-color", opts.backgroundColor);
-      $target.find(".left").css("background-color", opts.backgroundColor);
-      $target.find(".rotate").css("background-color", opts.progressColor);
-      $target.find(".right").css("background-color", opts.progressColor);
-
-      const $rotate = $target.find(".rotate");
-      setTimeout(function () {
-        $rotate.css({
-          transition: "transform " + opts.duration + "ms linear",
-          transform: "rotate(" + opts.percent * 3.6 + "deg)",
-        });
-      }, 1);
-
-      if (opts.percent > 50) {
-        let animationRight =
-          "toggle " + (opts.duration / opts.percent) * 50 + "ms step-end";
-        let animationLeft =
-          "toggle " + (opts.duration / opts.percent) * 50 + "ms step-start";
-        $target.find(".right").css({
-          animation: animationRight,
-          opacity: 1,
-        });
-        $target.find(".left").css({
-          animation: animationLeft,
-          opacity: 0,
-        });
-      }
-    });
-  };
-
-  function loader() {
-    $(window).on("load", function () {
-      // Animate loader off screen
-      $(".preloader").addClass("loaded");
-      $(".preloader").delay(600).fadeOut();
-    });
-  }
-  loader();
-})(jQuery); // End jQuery
+    function loader() {
+      $(window).on("load", function () {
+        // Animate loader off screen
+        $(".preloader").addClass("loaded");
+        $(".preloader").delay(600).fadeOut();
+      });
+    }
+    loader();
+  })(jQuery); // End jQuery

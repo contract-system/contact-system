@@ -3,10 +3,34 @@ import axios from "axios";
 import Sidebar from "./Sidebar";
 import HeaderPricing from "../Header/Header_pricing";
 import "./Subscription.css";
+import PopupCompany from "./PopupCompany";
+import PopupContract from "./PopupContract";
 
 const Subscription = () => {
   const [contracts, setContracts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isPopupCompanyOpen, setIsPopupCompanyOpen] = useState(false);
+  const [isPopupContractOpen, setIsPopupContractOpen] = useState(false);
+  const [selectedSub, setSelectedSub] = useState(null);
+
+  // Function to open the Company popup
+  const openCompanyPopup = (sub) => {
+    setSelectedSub(sub);
+    setIsPopupCompanyOpen(true);
+  };
+
+  // Function to open the Contract popup
+  const openContractPopup = (sub) => {
+    setSelectedSub(sub);
+    setIsPopupContractOpen(true);
+  };
+
+  // Function to close both popups
+  const closePopups = () => {
+    setIsPopupCompanyOpen(false);
+    setIsPopupContractOpen(false);
+    setSelectedSub(null);
+  };
 
   useEffect(() => {
     fetchContracts();
@@ -44,23 +68,11 @@ const Subscription = () => {
     }
   };
 
-  const handleEditProfile = () => {
-    // Logic for editing profile
-  };
-
-  const handleViewSubscription = () => {
-    // Logic for viewing subscription
-  };
-
   const getCardClass = (contract) => {
     const today = new Date();
-    // console.log(today);
     const expirationDate = new Date(contract.contract_expiration_date);
-    // console.log(expirationDate);
     const timeDiff = expirationDate - today;
-    // console.log(timeDiff);
     const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    // console.log(daysLeft);
 
     if (daysLeft <= 3) {
       return "card red";
@@ -72,18 +84,12 @@ const Subscription = () => {
 
   return (
     <>
-      <HeaderPricing />
       <div className="subscription-container">
-        <Sidebar
-          onEditProfile={handleEditProfile}
-          onViewSubscription={handleViewSubscription}
-        />
-
         <div
           style={{ position: "relative", marginLeft: "18%" }}
           className="container custom-container-2"
         >
-          <div className="row mt-5">
+          <div className="row mt-5 ml-5">
             {loading ? (
               <div className="text-center">Loading...</div>
             ) : contracts.length > 0 ? (
@@ -106,7 +112,6 @@ const Subscription = () => {
                     </p>
                     <ul className="lists">
                       <li className="list">
-                        {/* SVG and content */}
                         <span>Total Cost: ${contract.total_cost}</span>
                       </li>
                       <li className="list">
@@ -140,12 +145,20 @@ const Subscription = () => {
                         </span>
                       </li>
                     </ul>
-                    <button type="button" className="action">
-                      Get Started
+                    <button
+                      type="button"
+                      onClick={() => openContractPopup(contract)}
+                      className="action"
+                    >
+                      Contract Details
                     </button>
                     <br />
-                    <button type="button" className="action">
-                      View
+                    <button
+                      type="button"
+                      onClick={() => openCompanyPopup(contract.subscriptions)}
+                      className="action"
+                    >
+                      View Company Info
                     </button>
                   </div>
                 </div>
@@ -155,6 +168,20 @@ const Subscription = () => {
             )}
           </div>
         </div>
+
+        {/* Popup for Contract Details */}
+        <PopupContract
+          isOpen={isPopupContractOpen}
+          onClose={closePopups}
+          selectedSub={selectedSub}
+        />
+
+        {/* Popup for Company Details */}
+        <PopupCompany
+          isOpen={isPopupCompanyOpen}
+          onClose={closePopups}
+          selectedSub={selectedSub}
+        />
       </div>
     </>
   );

@@ -11,6 +11,7 @@ import Subscription from "./components/Profile/Subscription";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./styles/main.css"; // Your custom styles
+import ProfileLayout from "./components/Profile/profileLayout";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -27,7 +28,7 @@ root.render(
         <Route path="/contract" element={<Layout />} />{" "}
         {/* New route for Layout */}
         <Route path="/profile" element={<Profile />} />
-        <Route path="/subscription" element={<Subscription />} />
+        <Route path="/subscription" element={<ProfileLayout />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

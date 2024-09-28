@@ -56,15 +56,15 @@ class ContractController extends Controller
             'contract_name' => 'required|string|max:255',
             'signing_date' => 'required|date',
             'contract_expiration_date' => 'required|date|after:signing_date',
-            'subscription_expiration_date' => 'nullable|date|after:signing_date',
+            // 'subscription_expiration_date' => 'nullable|date|after:signing_date',
             'total_cost' => 'required|numeric|min:0',
             'admin_id' => 'nullable|numeric|exists:users,id',  // يمكن أن يكون null
             'status' => 'nullable|in:Pending,Approved,Expired',  // يمكن أن يكون null
             'user_id' => 'nullable|exists:users,id',  // تغيير إلى nullable
             'subscriptions_id' => 'nullable|exists:subscriptions,id',  // تغيير إلى nullable
         ]);
-        
-        
+
+
 
         $createContract = Contract::create($contractData);
         return response()->json([
@@ -82,7 +82,7 @@ class ContractController extends Controller
             'contract_name' => 'required|string|max:255',
             'signing_date' => 'required|date',
             'contract_expiration_date' => 'required|date|after:signing_date',
-            'subscription_expiration_date' => 'nullable|date|after:signing_date',
+            // 'subscription_expiration_date' => 'nullable|date|after:signing_date',
             'total_cost' => 'required|numeric|min:0',
             'admin_name' => 'nullable|string|max:255',
             'admin_id' => 'nullable|numeric',
@@ -119,7 +119,7 @@ class ContractController extends Controller
     // get contract  that user has
     public function getUserContract(string $id)
     {
-        $contracts = Contract::where('user_id', $id)
+        $contracts = Contract::with(['subscriptions'])->where('user_id', $id)
             ->where('status', 'Approved')
             ->get();
 

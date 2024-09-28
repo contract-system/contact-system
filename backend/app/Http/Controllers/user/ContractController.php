@@ -118,18 +118,19 @@ class ContractController extends Controller
 
     public function getUserContract(string $id)
     {
-        // $userID = Auth::user()->id; // change the id
-        $contract = Contract::where('user_id', $id)
-            ->get();
-        if ($contract) {
+        $contracts = Contract::where('user_id', $id)
+            ->where('status', 'Approved')
+            ->get(); // Retrieve all approved contracts for the user
+
+        if ($contracts->isNotEmpty()) { // Check if the collection is not empty
             return response()->json([
-                "contract" => $contract
+                "contracts" => $contracts // Return all contracts
             ], 200);
         } else {
             return response()->json([
-                "message" => "Contract not found!",
-                "contract" => $contract
-            ], 200);
+                "message" => "No approved contracts found!",
+                "contracts" => [] // Return an empty array if no contracts are found
+            ], 404); // Use 404 for not found
         }
     }
 }

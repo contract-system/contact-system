@@ -210,7 +210,7 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
               <button type="submit" className="theme-btn" disabled={isLoading}>
                 <span>{isLoading ? 'Loading...' : 'Submit'}</span>
               </button>
-              <button type="button" className="theme-btn bg-white" onClick={onClose}>
+              <button type="button" className="theme-btn bg-white"  onClick={onClose}>
                 <span>Close</span>
               </button>
             </div>
@@ -276,6 +276,7 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
           z-index: 9;
           display: inline-block;
           line-height: 1;
+          border:2px solid var(--theme)
         }
         .theme-btn:hover {
           color: var(--white);

@@ -1,45 +1,67 @@
-/* Sidebar styles */
-.sidebar {
-  width: 200px;
-  height: calc(100vh - 13px); /* Subtract navbar and footer height */
-  background-color: #2c3e50;
-  position: absolute;
-  top: 150px; /* Space for fixed navbar */
-  left: 0;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  overflow-y: auto; /* Allows scrolling if content overflows */
-}
-
-/* Sidebar menu list */
-.sidebar-menu {
-  list-style-type: none;
-  padding: 0;
+body {
   margin: 0;
+  font-family: "Lato", sans-serif;
 }
 
-/* Sidebar menu items */
-.sidebar-item {
-  color: #ecf0f1;
-  padding: 10px 0;
-  cursor: pointer;
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #2c3e50;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  padding: 16px;
+  text-decoration: none;
   font-size: 18px;
-  border-bottom: 1px solid #34495e;
-  transition: background-color 0.2s ease-in-out;
 }
 
-/* Hover effect for menu items */
-.sidebar-item:hover {
-  background-color: #34495e;
+.sidebar a.active {
+  background-color: #224a75;
+  color: white;
 }
 
-/* Logout button specific styling */
-.logout {
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+.sidebar a.logout {
   color: #e74c3c;
 }
 
-.logout:hover {
+.sidebar a.logout:hover {
   background-color: #c0392b;
+}
+
+.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 100vh; /* Adjust as necessary */
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {
+    float: left;
+  }
+  .content {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
 }

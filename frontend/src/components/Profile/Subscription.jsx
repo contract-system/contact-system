@@ -70,7 +70,7 @@ const Subscription = () => {
           }}
           className="container custom-container-2"
         >
-          <div className="row">
+          <div className="row cards">
             {loading ? (
               <div className="text-center">Loading...</div>
             ) : contracts.length > 0 ? (

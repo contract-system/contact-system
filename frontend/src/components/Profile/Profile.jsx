@@ -83,11 +83,14 @@ const Profile = () => {
   return (
     <>
       <Header_pricing />
-      <div className="profile-page">
+      <div className="subscription-container">
         <Sidebar
           onEditProfile={handleEditProfile}
           onViewSubscription={handleViewSubscription}
         />
+      </div>
+
+      <div className="profile-page">
         <div className="profile-content">
           <div className="profile-header">
             <h2>Profile Information</h2>

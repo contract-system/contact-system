@@ -21,9 +21,8 @@ const Sidebar = () => {
           "You have successfully logged out.",
           "success"
         );
-        // Here you might want to actually log the user out, e.g., clear tokens
-        // and navigate to a different page after logout
-        // navigate('/login'); // Uncomment if you want to navigate to login
+        // Clear tokens or perform other logout actions
+        // navigate('/login'); // Uncomment to redirect to login
       }
     });
   };
@@ -41,17 +40,13 @@ const Sidebar = () => {
   return (
     <>
       <div className="sidebar">
-        <ul className="sidebar-menu">
-          <li className="sidebar-item" onClick={onEditProfile}>
-            Edit Profile
-          </li>
-          <li className="sidebar-item" onClick={onViewSubscription}>
-            View Subscription
-          </li>
-          <li className="sidebar-item logout" onClick={handleLogout}>
-            Logout
-          </li>
-        </ul>
+        <a className="active" onClick={onEditProfile}>
+          Edit Profile
+        </a>
+        <a onClick={onViewSubscription}>View Subscription</a>
+        <a className="logout" onClick={handleLogout}>
+          Logout
+        </a>
       </div>
     </>
   );

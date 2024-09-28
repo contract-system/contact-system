@@ -15,10 +15,7 @@ const App = () => {
   return (
     <>
       <Header />
-<<<<<<< HEAD
-=======
 
->>>>>>> 8b4335c501ccf2f4e4045c2de086f7b0d364efb2
       <Hero />
       <Footer />
     </>

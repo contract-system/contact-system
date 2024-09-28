@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
-import Header from "../Header/Header";
-import Header_pricing from "../Header/Header_pricing";
+import HeaderPricing from "../Header/Header_pricing"; // Renamed for consistency
+import "./Subscription.css"; // Import the external CSS file
+import { color } from "framer-motion";
 
 const Subscription = () => {
   const [contract, setContract] = useState(null);
@@ -10,7 +11,7 @@ const Subscription = () => {
 
   useEffect(() => {
     const fetchContract = async () => {
-      const userId = 1; //localStorage.getItem("userId"); // Retrieve the user ID from local storage
+      const userId = 1; // Retrieve the user ID from local storage or hardcoded
 
       if (!userId) {
         console.error("User ID not found");
@@ -54,75 +55,138 @@ const Subscription = () => {
 
   return (
     <>
-      <Header_pricing />
+      <HeaderPricing />
       <div className="subscription-container">
         <Sidebar
           onEditProfile={handleEditProfile}
           onViewSubscription={handleViewSubscription}
         />
 
-        <div
-          style={{
-            position: "relative",
-            marginLeft: "18%",
-          }}
-          className="container custom-container-2"
-        >
-          <div className="row">
+        <div className="container custom-container">
+          <div className="row" style={{ margin: "26px 34px 29px 175px" }}>
             {contract ? (
               <div className="col-xl-3 col-lg-4 col-md-6 wow fadeInUp">
-                <div className="pricing-card-items">
-                  <div className="pricing-header">
-                    {/* If the h6 is not needed, you can remove it, or add content */}
-                    <h6>Subscription Details</h6>
-                    <ul>
-                      {contract.contract_name &&
-                        contract.contract_name.includes("TV") && (
-                          <li>
-                            <i className="flaticon-smart-tv"></i>
-                          </li>
-                        )}
-                    </ul>
+                <div className="card">
+                  <div className="header">
+                    <span style={{ color: "#000" }} className="title">
+                      {contract.contract_name}
+                    </span>
+                    <span style={{ color: "#000" }} className="price">
+                      ${contract.total_cost}
+                    </span>
                   </div>
-                  <ul className="price-list">
-                    <li>
-                      <i className="far fa-check"></i>
-                      Total Cost: ${contract.total_cost}
+
+                  <p className="desc">
+                    Etiam ac convallis enim, eget euismod dolor.
+                  </p>
+                  <ul className="lists">
+                    <li className="list">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                      <span>Total Cost: ${contract.total_cost}</span>
                     </li>
-                    <li>
-                      <i className="far fa-check"></i>
-                      Status: {contract.status}
+                    <li className="list">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                      <span>Status: {contract.status}</span>
                     </li>
-                    <li>
-                      <i className="far fa-check"></i>
-                      Subscription Status: {contract.subscription_status}
+                    <li className="list">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                      <span>
+                        Subscription Status: {contract.subscription_status}
+                      </span>
                     </li>
-                    <li>
-                      <i className="far fa-check"></i>
-                      Signing Date:{" "}
-                      {new Date(contract.signing_date).toLocaleDateString()}
+                    <li className="list">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                      <span>
+                        Signing Date:{" "}
+                        {new Date(contract.signing_date).toLocaleDateString()}
+                      </span>
                     </li>
-                    <li>
-                      <i className="far fa-check"></i>
-                      Expiration Date:{" "}
-                      {new Date(
-                        contract.contract_expiration_date
-                      ).toLocaleDateString()}
+                    <li className="list">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                      <span>
+                        Expiration Date:{" "}
+                        {new Date(
+                          contract.contract_expiration_date
+                        ).toLocaleDateString()}
+                      </span>
                     </li>
-                    <li>
-                      <i className="far fa-check"></i>
-                      Subscription Expiration:{" "}
-                      {new Date(
-                        contract.subscription_expiration_date
-                      ).toLocaleDateString()}
+                    <li className="list">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                      <span style={{ color: "red" }}>
+                        Subscription Expiration:{" "}
+                        {new Date(
+                          contract.subscription_expiration_date
+                        ).toLocaleDateString()}
+                      </span>
                     </li>
                   </ul>
-                  <div className="price">
-                    ${contract.total_cost} <span> | month </span>
-                  </div>
-                  <a href="pricing.html" className="theme-btn">
-                    <span>Get started</span>
-                  </a>
+                  <button type="button" className="action">
+                    Get Started
+                  </button>
+                  <br />
+                  <button type="" className="action">
+                    View
+                  </button>
                 </div>
               </div>
             ) : (

@@ -246,6 +246,19 @@ const Header = () => {
                     </nav>
                   </div>
                 </div>
+<<<<<<< HEAD:frontend/src/components/Header/Header_pricing.js
+                <div className="header-right-button d-none d-xl-block">
+  <Link to="/Login" className="theme-btn theme-btn2">
+    Get Started <i className="fas fa-arrow-right"></i>
+  </Link>
+</div>
+                <div className="hamburger-menu d-xl-none">
+                  <a href="javascript:void(0);" className="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </a>
+=======
               </div>
               <div className="header-right d-flex justify-content-end align-items-center">
                 <div className="header-button">
@@ -263,6 +276,7 @@ const Header = () => {
                       <span></span>
                     </div>
                   </div>
+>>>>>>> ac99c734500049347216a90c9032d48bfa7bf145:frontend/src/components/Header/Header.jsx
                 </div>
               </div>
             </div>

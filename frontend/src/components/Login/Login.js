@@ -41,6 +41,10 @@ const Login = () => {
     }
   };
 
+  const handleBackToHome = () => {
+    navigate('/'); // Navigate back to the home page
+  };
+
   return (
     <>
       <section className="hero-section hero-1 style-hero-3">
@@ -82,6 +86,9 @@ const Login = () => {
                   <p className="text-red">Don't have an account? <Link to="/Register">Register here</Link></p>
                   {message && <p>{message}</p>}
                 </div>
+                <button onClick={handleBackToHome} className="btn btn-secondary mt-3">
+                  Back to Home
+                </button>
               </div>
             </div>
           </div>

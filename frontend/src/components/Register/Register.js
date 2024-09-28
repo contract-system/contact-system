@@ -32,6 +32,10 @@ const Register = () => {
             setMessage(error.response ? error.response.data.message : 'Registration failed. Please try again.');
         }
     };
+    const handleBackToHome = () => {
+        navigate('/'); // Navigate back to the home page
+      };
+    
 
     return (
         <section className="hero-section hero-1 style-hero-3">
@@ -91,7 +95,11 @@ const Register = () => {
                   <p className="text-red">Already have an account? <a href="/Login" className="text-red">Login here</a></p>
                   {message && <p>{message}</p>}
                 </div>
+                <button onClick={handleBackToHome} className="btn btn-secondary mt-3">
+                  Back to Home
+                </button>
               </div>
+              
             </div>
           </div>
         </div>

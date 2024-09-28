@@ -14,7 +14,7 @@ return new class extends Migration
             $table->date('signing_date');
             $table->date('expiration_date');
             $table->decimal('total_cost', 10, 2);
-            $table->bigInteger('admin_id')->unsigned()->nullable();
+            $table->bigInteger('admin_id')->unsigned()->nullable()->default(null);
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('subscriptions_id')->unsigned();
             $table->enum('status', ['Pending', 'Approved', 'Expired'])->default('Pending');

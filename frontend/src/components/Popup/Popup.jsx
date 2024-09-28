@@ -11,7 +11,7 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
   const [months, setMonths] = useState(1); // عدد الأشهر
   const [price, setPrice] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
-  const [userId, setUserId] = useState(1);
+  const [userId, setUserId] = useState();
   const [subscriptionsId, setSubscriptionsId] = useState(selectedSub?.id || 1);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});

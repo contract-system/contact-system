@@ -17,7 +17,9 @@ const ProfileLayout = () => {
   }, []);
 
   const fetchContracts = async () => {
-    const userId = 1; // Change as needed
+    const userData = JSON.parse(sessionStorage.getItem("user"));
+    console.log(userData);
+    const userId = userData.id; // Get the user ID
 
     if (!userId) {
       console.error("User ID not found");

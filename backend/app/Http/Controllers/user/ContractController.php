@@ -54,7 +54,7 @@ class ContractController extends Controller
 
         $contractData = $request->validate([
             'contract_name' => 'required|string|max:255',
-            'signing_date' => 'required|date',
+            'signing_date' => 'required',
             'contract_expiration_date' => 'required|date|after:signing_date',
             // 'subscription_expiration_date' => 'nullable|date|after:signing_date',
             'total_cost' => 'required|numeric|min:0',

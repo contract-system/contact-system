@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const Popup = ({ isOpen, onClose, selectedSub }) => {
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
 
-  const [contractName, setContractName] = useState('');
-  const [signingDate, setSigningDate] = useState('');
-  const [contractExpirationDate, setContractExpirationDate] = useState('');
+  const [contractName, setContractName] = useState("");
+  const [signingDate, setSigningDate] = useState("");
+  const [contractExpirationDate, setContractExpirationDate] = useState("");
   const [months, setMonths] = useState(1); // عدد الأشهر
   const [price, setPrice] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
@@ -15,12 +15,30 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
   const [subscriptionsId, setSubscriptionsId] = useState(selectedSub?.id || 1);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
+    const storedUserData = window.sessionStorage.getItem("user");
+
+    if (storedUserData) {
+      // Parse the stored data as JSON
+      setUserData(JSON.parse(storedUserData));
+    } else {
+      setErrors("No user data found in session storage");
+    }
+
+    setIsLoading(false);
     if (selectedSub) {
       setSubscriptionsId(selectedSub.id);
       setPrice(selectedSub.price); // استخدم السعر من selectedSub
     }
+    const currentDate = new Date();
+
+    // Format the date as a string (e.g., "YYYY-MM-DD")
+    const formattedDate = currentDate.toISOString().split("T")[0];
+
+    // Set the formatted date in state
+    setSigningDate(formattedDate);
   }, [selectedSub]);
 
   const calculateTotalCost = () => {
@@ -40,10 +58,14 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
     setSigningDate(date);
     if (date) {
       const signingDateObj = new Date(date);
-      const expirationDateObj = new Date(signingDateObj.getFullYear(), signingDateObj.getMonth() + months, signingDateObj.getDate());
-      setContractExpirationDate(expirationDateObj.toISOString().split('T')[0]);
+      const expirationDateObj = new Date(
+        signingDateObj.getFullYear(),
+        signingDateObj.getMonth() + months,
+        signingDateObj.getDate()
+      );
+      setContractExpirationDate(expirationDateObj.toISOString().split("T")[0]);
     } else {
-      setContractExpirationDate('');
+      setContractExpirationDate("");
     }
   };
 
@@ -52,18 +74,25 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
     setMonths(newMonths);
     if (signingDate) {
       const signingDateObj = new Date(signingDate);
-      const expirationDateObj = new Date(signingDateObj.getFullYear(), signingDateObj.getMonth() + newMonths, signingDateObj.getDate());
-      setContractExpirationDate(expirationDateObj.toISOString().split('T')[0]);
+      const expirationDateObj = new Date(
+        signingDateObj.getFullYear(),
+        signingDateObj.getMonth() + newMonths,
+        signingDateObj.getDate()
+      );
+      setContractExpirationDate(expirationDateObj.toISOString().split("T")[0]);
     }
   };
 
   const validateForm = () => {
     let formErrors = {};
-    if (!contractName) formErrors.contractName = 'Contract name is required';
-    if (!signingDate) formErrors.signingDate = 'Signing date is required';
-    if (!contractExpirationDate) formErrors.contractExpirationDate = 'Contract expiration date is required';
-    if (!userId) formErrors.userId = 'User ID is required';
-    if (!subscriptionsId) formErrors.subscriptionsId = 'Subscriptions ID is required';
+    // if (!contractName) formErrors.contractName = "Contract name is required";
+    if (!signingDate) formErrors.signingDate = "Signing date is required";
+    if (!contractExpirationDate)
+      formErrors.contractExpirationDate =
+        "Contract expiration date is required";
+    if (!userId) formErrors.userId = "User ID is required";
+    if (!subscriptionsId)
+      formErrors.subscriptionsId = "Subscriptions ID is required";
 
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
@@ -79,31 +108,31 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
     setIsLoading(true);
 
     const contractData = {
-      contract_name: contractName,
+      contract_name: selectedSub.name,
       signing_date: signingDate,
       contract_expiration_date: contractExpirationDate,
-      price: price,
+      // price: price,
       total_cost: totalCost,
       user_id: userId,
       subscriptions_id: subscriptionsId,
     };
-
+    console.log(contractData);
     try {
-      await axios.post('http://127.0.0.1:8000/api/storeContract', contractData);
+      await axios.post("http://127.0.0.1:8000/api/storeContract", contractData);
       Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: 'The contract has been submitted successfully!',
-        confirmButtonText: 'OK',
+        icon: "success",
+        title: "Success",
+        text: "The contract has been submitted successfully!",
+        confirmButtonText: "OK",
       });
 
       onClose();
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'An error occurred while submitting the contract.',
-        confirmButtonText: 'OK',
+        icon: "error",
+        title: "Error",
+        text: error,
+        confirmButtonText: "OK",
       });
     } finally {
       setIsLoading(false);
@@ -124,40 +153,42 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
               <input
                 type="text"
                 placeholder="Enter contract name"
-                required
-                value={contractName}
-                onChange={(e) => setContractName(e.target.value)}
-                style={{ color: 'black' }}
+                disabled
+                value={selectedSub.name}
+                style={{ color: "black" }}
               />
-              {errors.contractName && <p className="error">{errors.contractName}</p>}
+              {errors.contractName && (
+                <p className="error">{errors.contractName}</p>
+              )}
             </div>
 
             {/* Signing Date */}
             <div>
-              <label>Signing Date</label>
               <input
                 type="date"
                 required
                 min={today}
                 value={signingDate}
                 onChange={(e) => handleSigningDateChange(e.target.value)}
-                style={{ color: 'black' }}
+                style={{ color: "black", display: "hidden" }}
               />
-              {errors.signingDate && <p className="error">{errors.signingDate}</p>}
+
+              {errors.signingDate && (
+                <p className="error">{errors.signingDate}</p>
+              )}
             </div>
 
-
             {/* Number of Months */}
-                <div>
-                <label>Number of Months</label>
-                <input
-                    type="number"
-                    value={months}
-                    min="1"
-                    onChange={handleMonthsChange}
-                    style={{ color: 'black' }}
-                />
-                </div>
+            <div>
+              <label>Number of Months</label>
+              <input
+                type="number"
+                value={months}
+                min="1"
+                onChange={handleMonthsChange}
+                style={{ color: "black" }}
+              />
+            </div>
 
             {/* Contract Expiration Date */}
             <div>
@@ -167,12 +198,12 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
                 required
                 value={contractExpirationDate}
                 readOnly
-                style={{ color: 'black' }}
+                style={{ color: "black" }}
               />
-              {errors.contractExpirationDate && <p className="error">{errors.contractExpirationDate}</p>}
+              {errors.contractExpirationDate && (
+                <p className="error">{errors.contractExpirationDate}</p>
+              )}
             </div>
-
-            
 
             {/* Subscription Price */}
             <div>
@@ -181,26 +212,31 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
                 type="number"
                 value={price}
                 readOnly
-                style={{ color: 'black' }}
+                style={{ color: "black" }}
               />
             </div>
 
             {/* Total Cost */}
             <div>
               <label>Total Cost</label>
-              <input type="number" value={totalCost} readOnly style={{ color: 'black' }} />
+              <input
+                type="number"
+                value={totalCost}
+                readOnly
+                style={{ color: "black" }}
+              />
             </div>
 
             {/* User ID */}
             <div>
-              <label>User ID</label>
+              {/* <label>User ID</label> */}
               <input
-                type="number"
+                type="hidden"
                 placeholder="Enter user ID"
                 required
-                value={userId}
+                value={userData.id}
                 onChange={(e) => setUserId(e.target.value)}
-                style={{ color: 'black' }}
+                style={{ color: "black" }}
               />
               {errors.userId && <p className="error">{errors.userId}</p>}
             </div>
@@ -208,9 +244,13 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
             {/* Action Buttons */}
             <div className="popup-buttons">
               <button type="submit" className="theme-btn" disabled={isLoading}>
-                <span>{isLoading ? 'Loading...' : 'Submit'}</span>
+                <span>{isLoading ? "Loading..." : "Submit"}</span>
               </button>
-              <button type="button" className="theme-btn bg-white" onClick={onClose}>
+              <button
+                type="button"
+                className="theme-btn bg-white"
+                onClick={onClose}
+              >
                 <span>Close</span>
               </button>
             </div>

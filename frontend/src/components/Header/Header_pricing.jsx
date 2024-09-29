@@ -1,9 +1,19 @@
-// src/components/Header/Header.js
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 const Header_pricing = () => {
+  const navigate = useNavigate();
+  const token = sessionStorage.getItem("token");
+  const user = JSON.parse(sessionStorage.getItem("user")); // Assuming user details are stored in session storage
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    navigate("/"); // Redirect to home after logout
+  };
+
   return (
     <header>
    <style>{`

@@ -12,14 +12,12 @@ class Contract extends Model
     protected $fillable = [
         'contract_name',
         'signing_date',
-        'contract_expiration_date',
-        'subscription_expiration_date',
+        'expiration_date',
         'total_cost',
         'admin_id',
         'user_id',
         'subscriptions_id',
         'status',
-        'subscriptions',
     ];
 
 

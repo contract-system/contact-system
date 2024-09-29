@@ -92,3 +92,35 @@ body {
   border-radius: 5px;
   font-size: 14px;
 }
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 15px; /* Adjust padding on smaller screens */
+    margin: 10px; /* Reduce margin for smaller screens */
+  }
+
+  .profile-header {
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .edit-btn,
+  .save-btn,
+  .cancel-btn {
+    width: 100%; /* Full width buttons on smaller screens */
+    margin-top: 10px; /* Space between buttons */
+  }
+
+  .profile-field input {
+    padding: 8px; /* Adjust padding inside input fields */
+  }
+
+  .profile-field p {
+    font-size: 14px; /* Adjust font size for paragraphs */
+  }
+
+  .profile-header h2 {
+    font-size: 18px; /* Adjust heading size */
+  }
+}

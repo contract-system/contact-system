@@ -1,16 +1,30 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Popup from "../Popup/Popup";
+import Swal from 'sweetalert2';
 
 const Packages = () => {
   const [packages, setpackages] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedSub, setSelectedSub] = useState(null);
+  const user = JSON.parse(sessionStorage.getItem("user")); // Assuming user details are stored in session storage
 
   // Function to open the popup
+
   const openPopup = (sub) => {
-    setSelectedSub(sub);
-    setIsPopupOpen(true);
+    const user = JSON.parse(sessionStorage.getItem("user")); // Fetch user details
+
+    if (!user || !user.id) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Login Required',
+        text: 'Please log in to subscribe.',
+        confirmButtonText: 'OK'
+      });
+    } else {
+      setSelectedSub(sub);
+      setIsPopupOpen(true);
+    }
   };
 
   // Function to close the popup

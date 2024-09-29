@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Popup from "../Popup/Popup"; // تأكد من تحديث المسار وفقًا لمكان حفظ الملف
+import Swal from 'sweetalert2';
 
 const Pricing = () => {
   const [subs, setSubs] = useState([]);
@@ -12,11 +13,23 @@ const Pricing = () => {
       .get("http://127.0.0.1:8000/api/getAllSubs")
       .then((response) => setSubs(response.data));
   }, []);
-  
+
   // Function to open the popup
+
   const openPopup = (sub) => {
-    setSelectedSub(sub);
-    setIsPopupOpen(true);
+    const user = JSON.parse(sessionStorage.getItem("user")); // Fetch user details
+
+    if (!user || !user.id) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Login Required',
+        text: 'Please log in to subscribe.',
+        confirmButtonText: 'OK'
+      });
+    } else {
+      setSelectedSub(sub);
+      setIsPopupOpen(true);
+    }
   };
 
   // Function to close the popup

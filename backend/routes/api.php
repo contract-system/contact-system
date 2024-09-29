@@ -62,6 +62,7 @@ Route::post('Status/{id}', [AdminController::class, 'changeContractStatus']);
 Route::delete('Contract/{id}', [AdminController::class, 'deleteContract']);
 Route::get('Subscriptions', [AdminController::class, 'getAllSubscriptions']);
 Route::get('Users', [AdminController::class, 'getAllUsers']);
+Route::post('Subscriptions', [AdminController::class, 'storeSubscription']);
 
 
 require __DIR__ . '/admin.php';

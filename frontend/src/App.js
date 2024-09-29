@@ -21,16 +21,14 @@ const App = () => {
   return (
     <>
       <Header />
-     
+
       <Hero />
-     
-      <Services/>
-      <About/>
-      <FeatureIconSection/>
-      <MovieSection/>
-      <ChoosePackageSection/>
-      
-      
+
+      {/* <Services/> */}
+      <About />
+      <FeatureIconSection />
+      <MovieSection />
+      <ChoosePackageSection />
 
       <Footer />
     </>

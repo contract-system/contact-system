@@ -29,7 +29,7 @@ class AdminController extends Controller
     public function changeContractStatus(Request $request, string $id)
     {
         $contract = Contract::find($id);
-        $contract->update(["status" => $request->status]);
+        $contract->update(["status" => $request->status, "admin_id" => $request->admin_id]);
         return response()->json(["message" => "Status Updated"]);
     }
     public function deleteContract(string $id)
@@ -45,6 +45,27 @@ class AdminController extends Controller
     public function getAllUsers()
     {
         return response()->json(["users" => User::all()]);
+    }
+    public function storeSubscription(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255',
+            'speed' => 'required|string|max:255',
+            'details' => 'required|string',
+            'price' => 'required|numeric',
+            'internet' => 'required|boolean',
+            'TV' => 'required|boolean',
+            'phone' => 'required|boolean',
+            'type' => 'required|in:Subscription,Package',
+        ]);
+
+        $subscription = Subscription::create($validatedData);
+
+        return response()->json([
+            'message' => 'Subscription created successfully',
+            'subscription' => $subscription
+        ], 201);
     }
     
 }

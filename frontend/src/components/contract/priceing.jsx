@@ -62,7 +62,7 @@ const Pricing = () => {
                       {sub.TV ? <span> + TV</span> : ""}
                       {sub.phone ? <span> + Phone</span> : ""}
                     </h6>
-                    <h3>Premium Plan</h3>
+                    <h3>{sub.name}</h3>
                   </div>
                   <ul className="icon-items p-0">
                     {sub.internet && (
@@ -99,10 +99,7 @@ const Pricing = () => {
                   <div className="price">
                     {sub.price} JOD<span> | month </span>
                   </div>
-                  <button
-                    className="theme-btn"
-                    onClick={() => openPopup(sub)}
-                  >
+                  <button className="theme-btn" onClick={() => openPopup(sub)}>
                     <span>Get started</span>
                   </button>
                 </div>

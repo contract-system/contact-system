@@ -134,6 +134,22 @@ export default function AdminPage() {
                 >
                   <i class="bi bi-collection-fill"></i> Pending Contracts
                 </ListGroup.Item>
+                <ListGroup.Item
+                  action
+                  as={Link}
+                  to="AddContract"
+                  className="text-danger"
+                >
+                  <i class="bi bi-plus-circle-fill"></i> Add Contract
+                </ListGroup.Item>
+                <ListGroup.Item
+                  action
+                  as={Link}
+                  to="AddSubscription"
+                  className="text-danger"
+                >
+                  <i class="bi bi-plus-circle-fill"></i> Add Subscription
+                </ListGroup.Item>
               </ListGroup>
             </Col>
           )}

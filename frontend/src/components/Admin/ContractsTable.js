@@ -12,7 +12,9 @@ export default function ContractsTable(props) {
   async function changeStatus(id, status) {
     await axios.post(`http://127.0.0.1:8000/api/Status/${id}`, {
       status,
+      admin_id: JSON.parse(sessionStorage.getItem("user")).id,
     });
+    fetchRows();
   }
 
   async function deleteContract(event) {

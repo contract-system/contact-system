@@ -8,7 +8,7 @@ export default function AddContract() {
     signing_date: "",
     expiration_date: "",
     total_cost: "",
-    admin_id: localStorage.getItem("user"), // depending on where omar stores id
+    admin_id: JSON.parse(sessionStorage.getItem("user")).id, // depending on where omar stores id
     user_id: "",
     subscriptions_id: "",
     status: "Pending", // default value

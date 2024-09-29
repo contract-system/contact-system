@@ -17,12 +17,15 @@ const Register = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/register', {
+            const response = await axios.post(
+              "http://127.0.0.1:8000/api/register",
+              {
                 full_name: fullName,
                 email,
                 password,
-                role_id: 1,
-            });
+                role_id: 2,
+              }
+            );
 
             console.log('Registration successful:', response.data);
             setMessage('Registration successful! You can now log in.');

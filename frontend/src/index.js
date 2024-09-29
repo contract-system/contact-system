@@ -16,6 +16,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import AdminPage from "./components/Admin/AdminPage";
 import ContractsTable from "./components/Admin/ContractsTable";
 import AddContract from "./components/Admin/AddContract";
+import AddSubscription from "./components/Admin/AddSubscription";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -49,6 +50,7 @@ root.render(
             element={<ContractsTable contracts="Approved" />}
           />
           <Route path="AddContract" element={<AddContract />} />
+          <Route path="AddSubscription" element={<AddSubscription />} />
         </Route>
       </Routes>
     </BrowserRouter>

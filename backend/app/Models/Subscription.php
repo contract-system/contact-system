@@ -11,6 +11,11 @@ class Subscription extends Model
 
     protected $fillable = [
         'name',
+        'company_name',
+        'TV',
+        'type',
+        'phone',
+        'internet',
         'speed',
         'details',
         'price',

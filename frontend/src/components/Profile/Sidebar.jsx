@@ -40,7 +40,6 @@ const Sidebar = () => {
   return (
     <>
       <div className="sidebar">
-<<<<<<< HEAD:frontend/src/components/Profile/Sidebar.js
         <a className="active" onClick={onEditProfile}>
           Edit Profile
         </a>
@@ -48,20 +47,6 @@ const Sidebar = () => {
         <a className="logout" onClick={handleLogout}>
           Logout
         </a>
-=======
-        <ul className="sidebar-menu">
-          <li className="sidebar-item" onClick={onEditProfile}>
-            {/* <Link to={"/userPro"}></Link> */}
-            Edit Profile
-          </li>
-          <li className="sidebar-item" onClick={onViewSubscription}>
-            View Subscription
-          </li>
-          <li className="sidebar-item logout" onClick={handleLogout}>
-            Logout
-          </li>
-        </ul>
->>>>>>> 1edd1ac50d181a8d40458d1f8c168a9009f5e251:frontend/src/components/Profile/Sidebar.jsx
       </div>
     </>
   );

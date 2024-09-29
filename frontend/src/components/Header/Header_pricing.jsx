@@ -6,29 +6,42 @@ import { Link } from "react-router-dom";
 const Header_pricing = () => {
   return (
     <header>
-      <style>{`
-        /* افتراضياً تجعل قائمة التنقل غير مرئية في العرض المنخفض */
-        .navbar-collapse {
-          display: none !important; /* إخفاء القائمة بشكل افتراضي */
-        }
+   <style>{`
+  .navbar-collapse {
+    display: none !important; /* إخفاء القائمة في الشاشات الصغيرة */
+  }
 
-        /* عندما تكون القائمة مفتوحة */
-        .navbar-collapse.show {
-          display: block !important; /* عرض القائمة */
-        }
+  .navbar-collapse.show {
+    display: block !important; /* إظهار القائمة عند الفتح */
+  }
 
-        /* تخصيص الزر */
-        .hamburger-menu {
-          cursor: pointer;
-        }
+  /* جعل القائمة أفقية في الشاشات الكبيرة */
+  @media (min-width: 992px) {
+    .navbar-collapse {
+      display: flex !important; /* تأكد من استخدام flexbox لعرض العناصر أفقياً */
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        /* تهيئة القائمة لتظهر بشكل أفقي في الشاشات الكبيرة */
-        @media (min-width: 992px) {
-          .navbar-collapse {
-            display: flex !important; /* عرض القائمة بشكل أفقي */
-          }
-        }
-      `}</style>
+    .main-menu {
+      display: flex; /* تأكد من أن القائمة أفقية */
+    }
+
+    .main-menu .nav-link {
+      padding: 0 15px;
+      text-align: center;
+    }
+  }
+
+  /* في الشاشات الصغيرة، تكون القائمة عمودية */
+  @media (max-width: 991px) {
+    .main-menu {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+`}</style>
+
 
       <div className="header-tops-section fix">
         <div className="container-fluid">

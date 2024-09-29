@@ -16,7 +16,7 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [userData, setUserData] = useState(null);
-  
+
   useEffect(() => {
     const storedUserData = window.sessionStorage.getItem("user");
 

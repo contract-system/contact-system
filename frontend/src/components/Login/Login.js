@@ -30,10 +30,10 @@ const Login = () => {
       setMessage(successMessage || 'Login successful!');
 
       // Redirect to the appropriate dashboard based on user role
-      if (user.role_id === 1) {
-        navigate('/'); // Redirect to User Dashboard
+      if (user.role_id == 1) {
+        navigate('/admin'); // Redirect to User Dashboard
       } else {
-        navigate('/Admin'); // Redirect to Admin Dashboard
+        navigate('/'); // Redirect to Admin Dashboard
       }
     } catch (error) {
       console.error('Login error:', error.response ? error.response.data : error.message);

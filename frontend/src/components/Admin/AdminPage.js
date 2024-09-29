@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Outlet, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import {
   Navbar,
   Container,
@@ -14,6 +14,13 @@ import useWindowSize from "./useWindowSize"; // Custom hook to detect window siz
 export default function AdminPage() {
   const [showSidebar, setShowSidebar] = useState(false);
   const { width } = useWindowSize(); // Custom hook to detect screen width
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (!user || user.role_id !== 1) {
+      navigate("/"); // Redirect to home if user doesn't exist or role_id is not 1
+    }
+  }, [user, navigate]);
 
   const handleCloseSidebar = () => setShowSidebar(false);
   const handleShowSidebar = () => setShowSidebar(true);
@@ -56,8 +63,6 @@ export default function AdminPage() {
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-                {/* Logo */}
-
                 {/* Sidebar Menu */}
                 <ListGroup variant="flush">
                   <ListGroup.Item

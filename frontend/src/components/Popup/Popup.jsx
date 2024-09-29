@@ -11,12 +11,14 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
   const [months, setMonths] = useState(1); // عدد الأشهر
   const [price, setPrice] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
-  const [userId, setUserId] = useState();
+  const [userId, setUserId] = useState(
+    JSON.parse(sessionStorage.getItem("user")).id
+  );
   const [subscriptionsId, setSubscriptionsId] = useState(selectedSub?.id || 1);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [userData, setUserData] = useState(null);
-  
+
   useEffect(() => {
     const storedUserData = window.sessionStorage.getItem("user");
 
@@ -110,7 +112,7 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
     const contractData = {
       contract_name: selectedSub.name,
       signing_date: signingDate,
-      contract_expiration_date: contractExpirationDate,
+      expiration_date: contractExpirationDate,
       // price: price,
       total_cost: totalCost,
       user_id: userId,

@@ -316,6 +316,7 @@ const Popup = ({ isOpen, onClose, selectedSub }) => {
           z-index: 9;
           display: inline-block;
           line-height: 1;
+          border:2px solid var(--theme)
         }
         .theme-btn:hover {
           color: var(--white);

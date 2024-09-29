@@ -15,7 +15,8 @@ export default function AdminPage() {
   const [showSidebar, setShowSidebar] = useState(false);
   const { width } = useWindowSize(); // Custom hook to detect screen width
   const navigate = useNavigate();
-  
+  const user = JSON.parse(sessionStorage.getItem("user"));
+
   useEffect(() => {
     if (!user || user.role_id !== 1) {
       navigate("/"); // Redirect to home if user doesn't exist or role_id is not 1

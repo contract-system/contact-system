@@ -78,9 +78,7 @@ const Header_pricing = () => {
                           </li>
                         )}
                         {/* Add other navigation items here */}
-                        <li>
-                          <Link to="/contact">Contact</Link>
-                        </li>
+        
                       </ul>
                     </nav>
                   </div>

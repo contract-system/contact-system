@@ -38,7 +38,7 @@ const Subscription = () => {
   }, []);
 
   const fetchContracts = async () => {
-    const userId = 1; // Change as needed
+    const userId = JSON.parse(sessionStorage.getItem("user")).id; // Change as needed
 
     if (!userId) {
       console.error("User ID not found");
@@ -71,7 +71,7 @@ const Subscription = () => {
 
   const getCardClass = (contract) => {
     const today = new Date();
-    const expirationDate = new Date(contract.contract_expiration_date);
+    const expirationDate = new Date(contract.expiration_date);
     const timeDiff = expirationDate - today;
     const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
@@ -133,7 +133,7 @@ const Subscription = () => {
                         <span>
                           Expiration Date:{" "}
                           {new Date(
-                            contract.contract_expiration_date
+                            contract.expiration_date
                           ).toLocaleDateString()}
                         </span>
                       </li>
